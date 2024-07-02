@@ -2,7 +2,7 @@
 
 namespace EmprestimoLivros.Domain.Entities
 {
-    public class Titulos
+    public class Titulo
     {
         public string NomeTitulo { get; set; }
         public int AnoLancamento { get; set; }

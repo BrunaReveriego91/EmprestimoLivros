@@ -1,6 +1,6 @@
 ﻿namespace EmprestimoLivros.Domain.Entities
 {
-    public class Emprestimos
+    public class Emprestimo
     {
         public int IdEmprestimo { get; set; }
         public int IdMembro { get; set; }
