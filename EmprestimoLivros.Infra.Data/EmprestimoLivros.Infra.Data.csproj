@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\EmprestimoLivros.Domain\EmprestimoLivros.Domain.csproj" />
     <ProjectReference Include="..\EmprestimosLivros.Domain\EmprestimoLivros.Domain.csproj" />
   </ItemGroup>
 
