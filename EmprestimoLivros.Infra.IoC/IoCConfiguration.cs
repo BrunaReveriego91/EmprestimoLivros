@@ -2,6 +2,8 @@
 using EmprestimoLivros.Application.Interfaces;
 using EmprestimoLivros.Application.Mappings.AutoMapperConfig;
 using EmprestimoLivros.Application.Services;
+using EmprestimoLivros.Application.Validator;
+using EmprestimoLivros.Infra.Data.Context;
 using EmprestimoLivros.Infra.Data.Interfaces;
 using EmprestimoLivros.Infra.Data.Repositories;
 using Microsoft.Extensions.DependencyInjection;
@@ -12,11 +14,13 @@ namespace EmprestimoLivros.Infra.IoC
     {
         public static void ConfigureRepository(IServiceCollection services)
         {
+            services.AddScoped<IMongoContext, MongoContext>();
             services.AddScoped<IEditoraRepository, EditoraRepository>();
         }
 
         public static void ConfigureService(IServiceCollection services)
         {
+            services.AddScoped<EditoraValidator>();
             services.AddScoped<IEditoraService, EditoraService>();
         }
 
