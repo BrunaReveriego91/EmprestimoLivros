@@ -1,4 +1,6 @@
-﻿using EmprestimoLivros.Infra.Data.Configuration;
+﻿using AutoMapper;
+using EmprestimoLivros.Application.Mappings.AutoMapperConfig;
+using EmprestimoLivros.Infra.Data.Configuration;
 using Microsoft.Extensions.Configuration;
 
 namespace EmprestimosLivros.API
@@ -14,8 +16,8 @@ namespace EmprestimosLivros.API
 
         public void ConfigureServices(IServiceCollection services)
         {
-            // Configurações dos serviços da aplicação.
             services.AddControllersWithViews();
+            services.AddSingleton<IMapper>(AutoMapperConfig.Initialize());
 
             services.Configure<MongoConfiguration>(
               Configuration.GetSection("MongoSettings"));
