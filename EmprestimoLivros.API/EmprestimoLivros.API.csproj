@@ -14,6 +14,7 @@
   <ItemGroup>
     <ProjectReference Include="..\EmprestimoLivros.Application\EmprestimoLivros.Application.csproj" />
     <ProjectReference Include="..\EmprestimoLivros.Infra.Data\EmprestimoLivros.Infra.Data.csproj" />
+    <ProjectReference Include="..\EmprestimoLivros.Infra.IoC\EmprestimoLivros.Infra.IoC.csproj" />
   </ItemGroup>
 
 </Project>

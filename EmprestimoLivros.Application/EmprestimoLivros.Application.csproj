@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\EmprestimoLivros.Domain\EmprestimoLivros.Domain.csproj" />
+    <ProjectReference Include="..\EmprestimoLivros.Infra.Data\EmprestimoLivros.Infra.Data.csproj" />
   </ItemGroup>
 
 </Project>
