@@ -29,17 +29,22 @@ namespace EmprestimoLivros.Application.Services
 
         public async Task CadastrarEditora(CadastrarEditoraRequestDTO editoraDTO)
         {
+            var editoraExistente = await _editoraRepository.BuscarEditora(editoraDTO.Id);
+
+            if(editoraExistente != null)
+                throw new Exception("Id já cadastrado.");
+
             var editora = await Task.Run(() => _mapper.Map<Editora>(editoraDTO));
 
             if (editora == null)
-                throw new Exception("Erro ao cadastrar carteira");
+                throw new Exception("Erro ao cadastrar editora.");
 
             await _editoraRepository.CadastrarEditora(editora);
         }
 
         public async Task<IEnumerable<Editora>> ListarEditoras()
         {
-            throw new NotImplementedException();
+            return await _editoraRepository.ListarEditoras();
         }
     }
 }

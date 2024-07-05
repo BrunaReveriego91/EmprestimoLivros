@@ -43,9 +43,18 @@ namespace EmprestimoLivros.Infra.Data.Repositories
 
         }
 
-        public Task<IEnumerable<Editora>> ListarEditoras()
+        public async Task<IEnumerable<Editora>> ListarEditoras()
         {
-            throw new NotImplementedException();
+            try
+            {
+                var editoras = await _context.Editoras.Find(_ => true).ToListAsync();
+
+                return editoras;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
     }
 }

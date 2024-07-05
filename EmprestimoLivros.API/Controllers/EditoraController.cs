@@ -16,18 +16,46 @@ namespace EmprestimoLivros.API.Controllers
         }
 
         [HttpGet]
+        public async Task<IActionResult> ListarEditoras()
+        {
+
+            var editoras = await _editoraService.ListarEditoras();
+            return Ok(editoras);
+
+        }
+
+        [HttpGet]
         [Route("{id}")]
         public async Task<IActionResult> BuscarEditora(int id)
         {
-            var editora = await _editoraService.BuscarEditora(id);
-            return Ok(editora);
+            try
+            {
+                var editora = await _editoraService.BuscarEditora(id);
+                return Ok(editora);
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpPost]
         public async Task<IActionResult> CadastrarEditora([FromBody] CadastrarEditoraRequestDTO editoraDTO)
         {
-            await _editoraService.CadastrarEditora(editoraDTO);
-            return Ok();
+            try
+            {
+                await _editoraService.CadastrarEditora(editoraDTO);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
         }
     }
 }

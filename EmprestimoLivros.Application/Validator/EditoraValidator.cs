@@ -14,9 +14,10 @@ namespace EmprestimoLivros.Application.Validator
             {
                 if (id <= 0)
                 {
-                    throw new Exception("Id deve ser um número válido");
+                    throw new ArgumentException("Id deve ser um número válido", nameof(id));
                 }
             });
+  
         }
 
         public Task CadastrarEditora(CadastrarEditoraRequestDTO editoraDTO)
