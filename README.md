@@ -5,10 +5,10 @@ Projeto de conclusão da Fase 4 da Pós Tech Fiap Curso de Arquitetura de Sistem
 MongoDB - Banco de dados NoSQL
 
 ✒️ Autores
-Andre Toledo Gama - Dev
-Bruna Reveriego - Dev
-Rodrigo Reis - Dev
-Fernando Parissenti - Dev
+- Andre Toledo Gama - Dev
+- Bruna Reveriego - Dev
+- Rodrigo Reis - Dev
+- Fernando Parissenti - Dev
 
 Requisitos
 1.	Requisitos Funcionais
