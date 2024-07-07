@@ -22,7 +22,7 @@ namespace EmprestimoLivros.Application.Services
 
         public async Task<Editora> BuscarEditora(int id)
         {
-            await _validator.BuscarEditora(id);
+            await _validator.ValidaId(id);
 
             return await _editoraRepository.BuscarEditora(id);
         }
@@ -31,7 +31,7 @@ namespace EmprestimoLivros.Application.Services
         {
             var editoraExistente = await _editoraRepository.BuscarEditora(editoraDTO.Id);
 
-            if(editoraExistente != null)
+            if (editoraExistente != null)
                 throw new Exception("Id já cadastrado.");
 
             var editora = await Task.Run(() => _mapper.Map<Editora>(editoraDTO));

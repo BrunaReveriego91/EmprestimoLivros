@@ -1,17 +1,15 @@
-﻿using MongoDB.Bson.Serialization.Attributes;
+﻿using EmprestimoLivros.Domain.Enums;
 
-namespace EmprestimoLivros.Domain.Entities
+namespace EmprestimoLivros.Application.DTOs.Titulo.Request
 {
-    public class Titulo
+    public class CadastrarTituloRequestDTO
     {
-        [BsonId]
         public int Id { get; set; }
         public string NomeTitulo { get; set; }
         public int AnoLancamento { get; set; }
         public string ISBN { get; set; }
         public string? Descricao { get; set; }
-        public Editora Editora { get; set; }
+        public int IdEditora { get; set; }
         public string GeneroTitulo { get; set; }
-
     }
 }

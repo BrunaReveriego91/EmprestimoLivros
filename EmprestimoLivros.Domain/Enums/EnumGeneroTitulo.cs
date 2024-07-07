@@ -2,17 +2,17 @@
 {
     public enum EnumGeneroTitulo
     {
-        Autoajuda,
-        Ficção,
-        TrueCrime,
-        Autobiografia,
-        Poesia,
-        Didático,
-        Gibi,
-        Infantil,
-        Romance,
-        Contos,
-        Religioso
+        autoajuda,
+        ficção,
+        trueCrime,
+        autobiografia,
+        poesia,
+        didatico,
+        gibi,
+        infantil,
+        romance,
+        contos,
+        religioso
 
     }
 }

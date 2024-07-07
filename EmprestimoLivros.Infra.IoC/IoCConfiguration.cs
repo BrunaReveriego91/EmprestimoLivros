@@ -16,12 +16,15 @@ namespace EmprestimoLivros.Infra.IoC
         {
             services.AddScoped<IMongoContext, MongoContext>();
             services.AddScoped<IEditoraRepository, EditoraRepository>();
+            services.AddScoped<ITituloRepository, TituloRepository>();
         }
 
         public static void ConfigureService(IServiceCollection services)
         {
             services.AddScoped<EditoraValidator>();
+            services.AddScoped<TituloValidator>();
             services.AddScoped<IEditoraService, EditoraService>();
+            services.AddScoped<ITituloService, TituloService>();
         }
 
         public static void ConfigureAutoMapper(IServiceCollection services)

@@ -1,6 +1,7 @@
 ﻿using EmprestimoLivros.Domain.Entities;
 using EmprestimoLivros.Infra.Data.Configuration;
 using Microsoft.Extensions.Options;
+using MongoDB.Bson;
 using MongoDB.Driver;
 
 namespace EmprestimoLivros.Infra.Data.Context
@@ -12,8 +13,27 @@ namespace EmprestimoLivros.Infra.Data.Context
         {
             var client = new MongoClient(config.Value.ConnectionString);
             _db = client.GetDatabase(config.Value.Database);
+
+            CriaCollectionSeNaoExistir<Editora>("Editoras").Wait();
+            CriaCollectionSeNaoExistir<Titulo>("Titulos").Wait();
+
+        }
+
+        private async Task CriaCollectionSeNaoExistir<T>(string nomeCollection)
+        {
+            await Task.Run(() =>
+            {
+                var filter = new BsonDocument("name", nomeCollection);
+                var collections = _db.ListCollections(new ListCollectionsOptions { Filter = filter });
+
+                if (!collections.Any())
+                    _db.CreateCollection(nomeCollection);
+            });
+
+
         }
 
         public IMongoCollection<Editora> Editoras => _db.GetCollection<Editora>("Editoras");
+        public IMongoCollection<Titulo> Titulos => _db.GetCollection<Titulo>("Titulos");
     }
 }
