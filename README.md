@@ -1,8 +1,9 @@
 Projeto de conclusão da Fase 4 da Pós Tech Fiap Curso de Arquitetura de Sistemas .NET com Azure
 
 🛠️ Construído com
-.NET CORE 6 - O framework web usado
-MongoDB - Banco de dados NoSQL
+- .NET CORE 6 - O framework web usado
+- MongoDB - Banco de dados NoSQL
+- AutoMapper - https://automapper.org/
 
 ✒️ Autores
 - Andre Toledo Gama - Dev
