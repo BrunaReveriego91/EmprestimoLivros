@@ -8,5 +8,7 @@ namespace EmprestimoLivros.Infra.Data.Context
         IMongoCollection<Editora> Editoras { get; }
 
         IMongoCollection<Titulo> Titulos { get; }
+
+        IMongoCollection<Usuario> Usuarios { get; }
     }
 }

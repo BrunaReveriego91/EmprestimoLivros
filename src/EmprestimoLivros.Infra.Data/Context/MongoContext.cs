@@ -16,6 +16,7 @@ namespace EmprestimoLivros.Infra.Data.Context
 
             CriaCollectionSeNaoExistir<Editora>("Editoras").Wait();
             CriaCollectionSeNaoExistir<Titulo>("Titulos").Wait();
+            CriaCollectionSeNaoExistir<Usuario>("Usuarios").Wait();
 
         }
 
@@ -35,5 +36,6 @@ namespace EmprestimoLivros.Infra.Data.Context
 
         public IMongoCollection<Editora> Editoras => _db.GetCollection<Editora>("Editoras");
         public IMongoCollection<Titulo> Titulos => _db.GetCollection<Titulo>("Titulos");
+        public IMongoCollection<Usuario> Usuarios => _db.GetCollection<Usuario>("Usuarios");
     }
 }
