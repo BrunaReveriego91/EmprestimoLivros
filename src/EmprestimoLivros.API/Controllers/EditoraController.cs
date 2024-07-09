@@ -67,7 +67,12 @@ namespace EmprestimoLivros.API.Controllers
             {
                 await _editoraService.RemoverEditora(Id);
                 return Ok();
-            } catch (Exception ex)
+            } 
+            catch (ArgumentException ex) 
+            { 
+                return BadRequest(ex.Message);
+            } 
+            catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }

@@ -17,31 +17,58 @@ namespace EmprestimoLivros.API.Controllers
         [HttpGet]
         public async Task<IActionResult> ListarAreasConhecimento() 
         {
-            var areas = await _areaConhecimentoService.ListarTodasAreas();
-            return Ok(areas);
+            try
+            {
+                var areas = await _areaConhecimentoService.ListarTodasAreas();
+                return Ok(areas);
+            } catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            
         }
 
         [HttpPost]
         [Route("{Id}")]
         public async Task<IActionResult> BuscarAreaConhecimento(int Id)
         {
-            var areaConhecimento = await _areaConhecimentoService.BuscarAreaConhecimento(Id);
-            return Ok(areaConhecimento);
+            try
+            {
+                var areaConhecimento = await _areaConhecimentoService.BuscarAreaConhecimento(Id);
+                return Ok(areaConhecimento);
+            } catch (Exception ex) 
+            {
+                return BadRequest(ex.Message);
+            }
+            
         }
 
         [HttpPost]
         public async Task<IActionResult> CadastrarAreaConhecimento(CadastrarAreaConhecimentoRequestDTO acDTO)
         {
-            await _areaConhecimentoService.CadastrarAreaConheicmento(acDTO);
-            return Ok();
+            try
+            {
+                await _areaConhecimentoService.CadastrarAreaConheicmento(acDTO);
+                return Ok();
+            } catch (Exception ex) 
+            {
+                return BadRequest(ex.Message);
+            }
+            
         }
 
         [HttpDelete]
         [Route("{id}")]
         public async Task<IActionResult> RemoverAreaConhecimento(int Id)
         {
-            await _areaConhecimentoService.RemoverAreaConhecimento(Id);
-            return Ok();
+            try
+            {
+                await _areaConhecimentoService.RemoverAreaConhecimento(Id);
+                return Ok();
+            } catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
         
     }
