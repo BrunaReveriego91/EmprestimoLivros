@@ -14,13 +14,11 @@ using System.Threading.Tasks;
 namespace EmprestimoLivros.Application.Services
 {
     public class AutenticarService : IAutenticarService
-    {
-        private readonly Mapper _mapper;
+    {        
         private readonly IAutenticarRepository _autenticarRepository;
         private readonly IJwtToken _jwtToken;
-        public AutenticarService(IAutenticarRepository autenticarRepository, Mapper mapper, IJwtToken jwtToken) 
+        public AutenticarService(IAutenticarRepository autenticarRepository, IJwtToken jwtToken) 
         {
-            _mapper = mapper;   
             _autenticarRepository = autenticarRepository;
             _jwtToken = jwtToken;
         }

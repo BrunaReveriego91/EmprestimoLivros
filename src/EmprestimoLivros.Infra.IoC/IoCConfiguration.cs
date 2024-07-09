@@ -20,6 +20,8 @@ namespace EmprestimoLivros.Infra.IoC
             services.AddScoped<IUsuarioRepository, UsuarioRepository>();
             services.AddScoped<ITipoPublicacaoRepository, TipoPublicacaoRepository>();
             services.AddScoped<IPublicacaoRepository, PublicacaoRepository>();
+            services.AddScoped<IAreaConhecimentoRepository, AreaConhecimentoRepository>();
+            services.AddScoped<IAutenticarRepository, AutenticarRepository>();
         }
 
         public static void ConfigureService(IServiceCollection services)
@@ -34,6 +36,9 @@ namespace EmprestimoLivros.Infra.IoC
             services.AddScoped<IUsuarioService, UsuarioService>();
             services.AddScoped<ITipoPublicacaoService, TipoPublicacaoService>();
             services.AddScoped<IPublicacaoService, PublicacaoService>();
+            services.AddScoped<IAreaConhecimentoService, AreaConhecimentoService>();
+            services.AddScoped<IAutenticarService, AutenticarService>();
+            services.AddScoped<IJwtToken, JwtToken>();
         }
 
         public static void ConfigureAutoMapper(IServiceCollection services)
