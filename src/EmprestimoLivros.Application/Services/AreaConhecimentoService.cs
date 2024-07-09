@@ -41,5 +41,10 @@ namespace EmprestimoLivros.Application.Services
         {
             return _areaConhecimentoRepository.ListarTodasAreas();
         }
+
+        public Task RemoverAreaConhecimento(int Id)
+        {
+            return _areaConhecimentoRepository.RemoverAreaConhecimento(Id);
+        }
     }
 }

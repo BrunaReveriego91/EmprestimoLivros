@@ -57,5 +57,21 @@ namespace EmprestimoLivros.API.Controllers
             }
 
         }
+
+        [HttpDelete]
+        [Route("{id}")]
+        public async Task<IActionResult> RemoverTipoPublicacao(int Id)
+        {
+            try
+            {
+                await _tipoPublicacaoService.RemoverTipoPublicacao(Id);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+        }
     }
 }

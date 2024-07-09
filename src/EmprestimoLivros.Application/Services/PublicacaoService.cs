@@ -36,5 +36,10 @@ namespace EmprestimoLivros.Application.Services
         {
             return _publicacaoRepository.ListarPublicacao();
         }
+
+        public Task RemoverPublicacao(int id)
+        {
+            return _publicacaoRepository.RemoverPublicacao(id);
+        }
     }
 }

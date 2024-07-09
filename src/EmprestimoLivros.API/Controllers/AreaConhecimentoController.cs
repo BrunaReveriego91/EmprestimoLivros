@@ -35,5 +35,14 @@ namespace EmprestimoLivros.API.Controllers
             await _areaConhecimentoService.CadastrarAreaConheicmento(acDTO);
             return Ok();
         }
+
+        [HttpDelete]
+        [Route("{id}")]
+        public async Task<IActionResult> RemoverAreaConhecimento(int Id)
+        {
+            await _areaConhecimentoService.RemoverAreaConhecimento(Id);
+            return Ok();
+        }
+        
     }
 }

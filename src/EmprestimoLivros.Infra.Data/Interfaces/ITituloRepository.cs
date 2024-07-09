@@ -7,5 +7,6 @@ namespace EmprestimoLivros.Infra.Data.Interfaces
         Task<IEnumerable<Titulo>> ListarTitulos();
         Task<Titulo> BuscarTitulo(int id);
         Task CadastrarTitulo(Titulo titulo);
+        Task RemoverTitulo(int id);
     }
 }

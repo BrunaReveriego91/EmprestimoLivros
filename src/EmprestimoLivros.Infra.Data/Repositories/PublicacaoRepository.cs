@@ -33,5 +33,10 @@ namespace EmprestimoLivros.Infra.Data.Repositories
         {
             return await _context.Publicacao.Find(_ => true).ToListAsync();
         }
+
+        public Task RemoverPublicacao(int id)
+        {
+            return _context.Publicacao.FindOneAndDeleteAsync(e => e.Id == id);
+        }
     }
 }

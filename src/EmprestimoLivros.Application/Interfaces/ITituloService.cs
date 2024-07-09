@@ -14,5 +14,6 @@ namespace EmprestimoLivros.Application.Interfaces
         Task<IEnumerable<Titulo>> ListarTitulos();
         Task<Titulo> BuscarTitulo(int id);
         Task CadastrarTitulo(CadastrarTituloRequestDTO tituloDTO);
+        Task RemoverTitulo(int id);
     }
 }

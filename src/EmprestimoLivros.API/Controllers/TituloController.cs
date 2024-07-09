@@ -1,5 +1,6 @@
 ﻿using EmprestimoLivros.Application.DTOs.Titulo.Request;
 using EmprestimoLivros.Application.Interfaces;
+using EmprestimoLivros.Application.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EmprestimoLivros.API.Controllers
@@ -49,6 +50,22 @@ namespace EmprestimoLivros.API.Controllers
             try
             {
                 await _tituloService.CadastrarTitulo(tituloDTO);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+        }
+
+        [HttpDelete]
+        [Route("{id}")]
+        public async Task<IActionResult> RemoverTitulo(int Id)
+        {
+            try
+            {
+                await _tituloService.RemoverTitulo(Id);
                 return Ok();
             }
             catch (Exception ex)

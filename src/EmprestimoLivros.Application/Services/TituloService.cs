@@ -57,5 +57,10 @@ namespace EmprestimoLivros.Application.Services
         {
             return await _tituloRepository.ListarTitulos();
         }
+
+        public Task RemoverTitulo(int id)
+        {
+            return _tituloRepository.RemoverTitulo(id);
+        }
     }
 }

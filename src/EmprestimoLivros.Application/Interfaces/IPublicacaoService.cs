@@ -13,5 +13,6 @@ namespace EmprestimoLivros.Application.Interfaces
         Task<IEnumerable<Publicacao>> ListarPublicacao();
         Task CadastrarPublicacao(CadastrarPublicacaoRequestDTO publicacao);
         Task<Publicacao> BuscarPublicacao(int id);
+        Task RemoverPublicacao(int id);
     }
 }
