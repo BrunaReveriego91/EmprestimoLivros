@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace EmprestimoLivros.Application.DTOs.Emprestimo.Request
+﻿namespace EmprestimoLivros.Application.DTOs.Emprestimo.Request
 {
     public class CadastrarEmprestimoRequestDTO
     {
-
+        public int IdEmprestimo { get; set; }
+        public string Matricula { get; set; }
+        public int IdPublicacao { get; set; }
+        public DateTime DataEmprestimo { get; set; }
+        public DateTime DataDevolucao { get; set; }
+        public bool FoiDevolvido { get; set; } = false;
     }
 }
