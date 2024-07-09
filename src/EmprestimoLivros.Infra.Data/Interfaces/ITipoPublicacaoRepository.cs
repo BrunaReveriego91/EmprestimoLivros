@@ -12,5 +12,6 @@ namespace EmprestimoLivros.Infra.Data.Interfaces
         Task<IEnumerable<TipoPublicacao>> ListarTipoPublicacao();
         Task CadastrarTipoPublicacao(TipoPublicacao tipoPublicacao);
         Task<TipoPublicacao> BuscarTipoPublicacao(string tipoPublicacao);
+        Task RemoverTipoPublicacao(int id);
     }
 }

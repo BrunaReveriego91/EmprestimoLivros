@@ -11,6 +11,7 @@ namespace EmprestimoLivros.Infra.Data.Interfaces
     {
         Task<IEnumerable<AreaConhecimento>> ListarTodasAreas();
         Task<AreaConhecimento> BuscarAreaConhecimento(int Id);
-        Task CadastrarAreaConheicmento(AreaConhecimento areaConhecimento); 
+        Task CadastrarAreaConheicmento(AreaConhecimento areaConhecimento);
+        Task RemoverAreaConhecimento(int Id);
     }
 }

@@ -13,5 +13,6 @@ namespace EmprestimoLivros.Application.Interfaces
         Task<IEnumerable<AreaConhecimento>> ListarTodasAreas();
         Task<AreaConhecimento> BuscarAreaConhecimento(int Id);
         Task CadastrarAreaConheicmento(CadastrarAreaConhecimentoRequestDTO areaConhecimento);
+        Task RemoverAreaConhecimento(int Id);
     }
 }

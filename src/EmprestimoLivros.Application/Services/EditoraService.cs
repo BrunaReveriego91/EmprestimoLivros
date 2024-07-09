@@ -70,5 +70,11 @@ namespace EmprestimoLivros.Application.Services
         {
             return await _editoraRepository.ListarEditoras();
         }
+
+        public Task RemoverEditora(int id)
+        {
+            _validator.ValidaId(id);
+            return _editoraRepository.RemoverEditora(id);
+        }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using EmprestimoLivros.Application.DTOs.Editora.Request;
 using EmprestimoLivros.Application.Interfaces;
+using EmprestimoLivros.Application.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EmprestimoLivros.API.Controllers
@@ -56,6 +57,26 @@ namespace EmprestimoLivros.API.Controllers
                 return BadRequest(ex.Message);
             }
 
+        }
+
+        [HttpDelete]
+        [Route("{id}")]
+        public async Task<IActionResult> RemoverEditora(int Id)
+        {
+            try
+            {
+                await _editoraService.RemoverEditora(Id);
+                return Ok();
+            } 
+            catch (ArgumentException ex) 
+            { 
+                return BadRequest(ex.Message);
+            } 
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            
         }
     }
 }

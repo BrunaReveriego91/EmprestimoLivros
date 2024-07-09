@@ -1,6 +1,7 @@
 ﻿using EmprestimoLivros.Application.DTOs.Publicacao.Request;
 using EmprestimoLivros.Application.DTOs.Usuario.Request;
 using EmprestimoLivros.Application.Interfaces;
+using EmprestimoLivros.Application.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EmprestimoLivros.API.Controllers
@@ -47,6 +48,22 @@ namespace EmprestimoLivros.API.Controllers
             try
             {
                 await _publicacaoService.CadastrarPublicacao(publicacaoRequestDTO);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+        }
+
+        [HttpDelete]
+        [Route("{id}")]
+        public async Task<IActionResult> RemoverPublicacao(int Id)
+        {
+            try
+            {
+                await _publicacaoService.RemoverPublicacao(Id);
                 return Ok();
             }
             catch (Exception ex)
