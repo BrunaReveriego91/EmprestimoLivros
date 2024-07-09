@@ -1,7 +1,5 @@
-﻿using EmprestimoLivros.Application.DTOs.Titulo.Request;
-using EmprestimoLivros.Application.DTOs.Usuario.Request;
+﻿using EmprestimoLivros.Application.DTOs.Usuario.Request;
 using EmprestimoLivros.Application.Interfaces;
-using EmprestimoLivros.Application.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EmprestimoLivros.API.Controllers

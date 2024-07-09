@@ -16,7 +16,6 @@ namespace EmprestimoLivros.Infra.IoC
         {
             services.AddScoped<IMongoContext, MongoContext>();
             services.AddScoped<IEditoraRepository, EditoraRepository>();
-            services.AddScoped<ITituloRepository, TituloRepository>();
             services.AddScoped<IUsuarioRepository, UsuarioRepository>();
             services.AddScoped<ITipoPublicacaoRepository, TipoPublicacaoRepository>();
             services.AddScoped<IPublicacaoRepository, PublicacaoRepository>();
@@ -32,7 +31,6 @@ namespace EmprestimoLivros.Infra.IoC
             services.AddScoped<TipoPublicacaoValidator>();
             services.AddScoped<PublicacaoValidator>();
             services.AddScoped<IEditoraService, EditoraService>();
-            services.AddScoped<ITituloService, TituloService>();
             services.AddScoped<IUsuarioService, UsuarioService>();
             services.AddScoped<ITipoPublicacaoService, TipoPublicacaoService>();
             services.AddScoped<IPublicacaoService, PublicacaoService>();

@@ -14,13 +14,39 @@ namespace EmprestimoLivros.Tests.IntegrationTests
 
         [Theory]
         [InlineData("/Editora")]
-        public async Task ListarEditoras(string url)
+        public async Task ListarEditorasDeveRetornarHttpStatusOK(string url)
         {
             //Arrange & Act
             var response = await _httpClient.GetAsync(url);
 
             //Assert
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+        }
+
+        [Theory]
+        [InlineData("/Editora/{id}")]
+        public async Task BuscarEditoraPorIdDeveRetornarHttpStatusOK(string url)
+        {
+            //Arrange & Act
+            var id = "1";
+
+            var response = await _httpClient.GetAsync(url.Replace("{id}", id));
+
+            //Assert
+            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+        }
+
+        [Theory]
+        [InlineData("/Editora/{id}")]
+        public async Task BuscarEditoraPorIdDeveRetornarBadRequest(string url)
+        {
+            //Arrange & Act
+            var id = "-1";
+
+            var response = await _httpClient.GetAsync(url.Replace("{id}", id));
+
+            //Assert
+            Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
         }
     }
 }
