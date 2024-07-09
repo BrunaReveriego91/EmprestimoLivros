@@ -13,5 +13,6 @@ namespace EmprestimoLivros.Infra.Data.Context
         IMongoCollection<TipoPublicacao> TipoPublicacao { get; }
         IMongoCollection<Publicacao> Publicacao { get; }
         IMongoCollection<UsuarioLogin> UsuarioLogin { get; }
+        IMongoCollection<AreaConhecimento> AreaConhecimento { get; }
     }
 }

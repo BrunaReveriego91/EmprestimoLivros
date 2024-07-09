@@ -20,6 +20,7 @@ namespace EmprestimoLivros.Infra.Data.Context
             CriaCollectionSeNaoExistir<TipoPublicacao>("TipoPublicacoes").Wait();
             CriaCollectionSeNaoExistir<Publicacao>("Publicacoes").Wait();
             CriaCollectionSeNaoExistir<UsuarioLogin>("UsuarioLogin").Wait();
+            CriaCollectionSeNaoExistir<AreaConhecimento>("AreaConhecimento").Wait();
         }
 
         private async Task CriaCollectionSeNaoExistir<T>(string nomeCollection)
@@ -42,5 +43,6 @@ namespace EmprestimoLivros.Infra.Data.Context
         public IMongoCollection<TipoPublicacao> TipoPublicacao => _db.GetCollection<TipoPublicacao>("TipoPublicacoes");
         public IMongoCollection<Publicacao> Publicacao => _db.GetCollection<Publicacao>("Publicacoes");
         public IMongoCollection<UsuarioLogin> UsuarioLogin => _db.GetCollection<UsuarioLogin>("UsuarioLogin");
+        public IMongoCollection<AreaConhecimento> AreaConhecimento => _db.GetCollection<AreaConhecimento>("AreaConhecimento");
     }
 }
