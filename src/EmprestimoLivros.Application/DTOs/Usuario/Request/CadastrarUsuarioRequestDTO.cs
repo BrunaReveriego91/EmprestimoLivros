@@ -13,5 +13,7 @@ namespace EmprestimoLivros.Application.DTOs.Usuario.Request
         public string Matricula { get; set; }
         public DateTime DataNascimento { get; set; }
         public string TipoUsuario { get; set; }
+        public string Login { get; set; }
+        public string Password { get; set; }
     }
 }
