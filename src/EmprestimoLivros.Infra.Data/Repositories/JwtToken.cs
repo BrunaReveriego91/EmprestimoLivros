@@ -26,7 +26,7 @@ namespace EmprestimoLivros.Infra.Data.Repositories
             List<Claim> claims = new()
             {
                 new Claim("Nome", usuario.Nome.ToString()),
-                new Claim(ClaimTypes.Role, "ADMIN")
+                new Claim(ClaimTypes.Role, usuario.Role),                
             };
 
             var tokenDescriptor = new SecurityTokenDescriptor
