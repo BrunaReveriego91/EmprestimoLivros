@@ -3,9 +3,10 @@
     public class Emprestimo
     {
         public int IdEmprestimo { get; set; }
-        public int IdMembro { get; set; }
+        public Usuario Usuario { get; set; }
+        public Publicacao Publicacao { get; set; }
         public DateTime DataEmprestimo { get; set; }
         public DateTime DataDevolucao { get; set; }
-        public bool EmprestimoFinalizado { get; set; } = false;
+        public bool FoiDevolvido { get; set; } = false;
     }
 }
