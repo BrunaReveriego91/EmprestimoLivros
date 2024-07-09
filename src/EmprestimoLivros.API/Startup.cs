@@ -1,4 +1,5 @@
-﻿using EmprestimoLivros.Infra.Data.Configuration;
+﻿using EmprestimoLivros.Domain.Entities;
+using EmprestimoLivros.Infra.Data.Configuration;
 using EmprestimoLivros.Infra.IoC;
 using Microsoft.OpenApi.Models;
 
@@ -52,6 +53,11 @@ namespace EmprestimosLivros.API
             services.Configure<MongoConfiguration>(
               Configuration.GetSection("MongoSettings"));
 
+            services.Configure<AppSettings>(
+                Configuration.GetSection("AppSettings"));
+
+
+
             IoCConfiguration.ConfigureRepository(services);
             IoCConfiguration.ConfigureService(services);
             IoCConfiguration.ConfigureAutoMapper(services);
@@ -74,7 +80,7 @@ namespace EmprestimosLivros.API
             }
             else
             {
-               
+
                 app.UseExceptionHandler("/Error");
                 app.UseHsts();
             }
