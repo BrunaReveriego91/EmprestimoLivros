@@ -2,11 +2,6 @@
 using EmprestimoLivros.Infra.Data.Context;
 using EmprestimoLivros.Infra.Data.Interfaces;
 using MongoDB.Driver;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EmprestimoLivros.Infra.Data.Repositories
 {
@@ -22,6 +17,14 @@ namespace EmprestimoLivros.Infra.Data.Repositories
         {
             var filter = Builders<TipoPublicacao>.Filter.Eq(t => t.Nome, tipoPublicacao);                
             return await _context.TipoPublicacao.Find(filter).FirstOrDefaultAsync();
+        }
+
+        public async Task<TipoPublicacao> BuscarTipoPublicacaoPorId(int id)
+        {
+            var filter = Builders<TipoPublicacao>.Filter.Eq(e => e.Id, id);
+            var editora = await _context.TipoPublicacao.Find(filter).FirstOrDefaultAsync();
+
+            return editora;
         }
 
         public Task CadastrarTipoPublicacao(TipoPublicacao tipoPublicacao)

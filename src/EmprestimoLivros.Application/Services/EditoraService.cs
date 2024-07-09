@@ -54,16 +54,14 @@ namespace EmprestimoLivros.Application.Services
             await _editoraRepository.CadastrarEditora(editora);
         }
 
-        public async Task ExcluirEditora(int id)
+        public async Task RemoverEditora(int id)
         {
             var editoraExistente = await _editoraRepository.BuscarEditora(id);
 
             if (editoraExistente == null)
                 throw new Exception("Cadastro editora não localizado.");
 
-
-
-            await _editoraRepository.ExcluirEditora(id);
+            await _editoraRepository.RemoverEditora(id);
         }
 
         public async Task<IEnumerable<Editora>> ListarEditoras()
@@ -71,10 +69,5 @@ namespace EmprestimoLivros.Application.Services
             return await _editoraRepository.ListarEditoras();
         }
 
-        public Task RemoverEditora(int id)
-        {
-            _validator.ValidaId(id);
-            return _editoraRepository.RemoverEditora(id);
-        }
     }
 }

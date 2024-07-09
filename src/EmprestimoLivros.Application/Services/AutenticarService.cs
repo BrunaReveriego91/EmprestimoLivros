@@ -1,15 +1,6 @@
-﻿using AutoMapper;
-using EmprestimoLivros.Application.DTOs.Autenticar;
-using EmprestimoLivros.Application.Interfaces;
+﻿using EmprestimoLivros.Application.Interfaces;
 using EmprestimoLivros.Domain.Entities;
 using EmprestimoLivros.Infra.Data.Interfaces;
-using EmprestimoLivros.Infra.Data.Repositories;
-using MongoDB.Driver;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EmprestimoLivros.Application.Services
 {

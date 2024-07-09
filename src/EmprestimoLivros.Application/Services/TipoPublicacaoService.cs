@@ -16,25 +16,30 @@ namespace EmprestimoLivros.Application.Services
             _tipoPublicacaoRepository = tipoPublicacaoRepository;
         }
 
-        public Task<TipoPublicacao> BuscarTipoPublicacao(string tipoPublicacao)
+        public async Task<TipoPublicacao> BuscarTipoPublicacao(string tipoPublicacao)
         {
-            return _tipoPublicacaoRepository.BuscarTipoPublicacao(tipoPublicacao);
+            return await _tipoPublicacaoRepository.BuscarTipoPublicacao(tipoPublicacao);
         }
 
-        public Task CadastrarTipoPublicacao(CadastrarTipoPublicacaoRequestDTO tipoPublicacao)
+        public async Task<TipoPublicacao> BuscarTipoPublicacaoPorId(int id)
+        {
+            return await _tipoPublicacaoRepository.BuscarTipoPublicacaoPorId(id);
+        }
+
+        public async Task CadastrarTipoPublicacao(CadastrarTipoPublicacaoRequestDTO tipoPublicacao)
         {
             var pub = _mapper.Map<TipoPublicacao>(tipoPublicacao);
-            return _tipoPublicacaoRepository.CadastrarTipoPublicacao(pub);
+            await _tipoPublicacaoRepository.CadastrarTipoPublicacao(pub);
         }
 
-        public Task<IEnumerable<TipoPublicacao>> ListarTipoPublicacao()
+        public async Task<IEnumerable<TipoPublicacao>> ListarTipoPublicacao()
         {
-            return _tipoPublicacaoRepository.ListarTipoPublicacao();
+            return await _tipoPublicacaoRepository.ListarTipoPublicacao();
         }
 
-        public Task RemoverTipoPublicacao(int id)
+        public async Task RemoverTipoPublicacao(int id)
         {
-            return _tipoPublicacaoRepository.RemoverTipoPublicacao(id);
+            await _tipoPublicacaoRepository.RemoverTipoPublicacao(id);
         }
     }
 }

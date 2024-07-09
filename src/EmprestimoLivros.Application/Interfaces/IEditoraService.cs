@@ -9,7 +9,7 @@ namespace EmprestimoLivros.Application.Interfaces
         Task<Editora> BuscarEditora(int id);
         Task CadastrarEditora(CadastrarEditoraRequestDTO editoraDTO);
         Task AlterarEditora(AlterarEditoraRequestDTO editoraDTO);
-        Task ExcluirEditora(int id);
+        Task RemoverEditora(int id);
 
     }
 }

@@ -9,32 +9,59 @@ namespace EmprestimoLivros.Application.Services
     public class PublicacaoService : IPublicacaoService
     {
         private readonly IMapper _mapper;
+        private readonly IEditoraService _editoraService;
+        private readonly IAreaConhecimentoService _areaConhecimentoService;
+        private readonly ITipoPublicacaoService _tipoPublicacaoService;
         private readonly IPublicacaoRepository _publicacaoRepository;
-        public PublicacaoService(IMapper mapper, IPublicacaoRepository publicacaoRepository) 
+        public PublicacaoService(IMapper mapper, IPublicacaoRepository publicacaoRepository, IEditoraService editoraService, IAreaConhecimentoService areaConhecimentoService, ITipoPublicacaoService tipoPublicacaoService)
         {
             _mapper = mapper;
             _publicacaoRepository = publicacaoRepository;
+            _editoraService = editoraService;
+            _areaConhecimentoService = areaConhecimentoService;
+            _tipoPublicacaoService = tipoPublicacaoService;
         }
 
-        public Task<Publicacao> BuscarPublicacao(int id)
+        public async Task<Publicacao> BuscarPublicacao(int id)
         {
-            return _publicacaoRepository.BuscarPublicacao(id);
+            return await _publicacaoRepository.BuscarPublicacao(id);
         }
 
-        public Task CadastrarPublicacao(CadastrarPublicacaoRequestDTO publicacao)
+        public async Task CadastrarPublicacao(CadastrarPublicacaoRequestDTO publicacao)
         {
+            var tipoPublicacao = await _tipoPublicacaoService.BuscarTipoPublicacaoPorId(publicacao.IdTipoPublicacao);
+
+            if (tipoPublicacao == null)
+                throw new Exception("Tipo publicação não cadastrada.");
+
+            var editora = await _editoraService.BuscarEditora(publicacao.IdEditora);
+
+            if (editora == null)
+                throw new Exception("Editora não cadastrada.");
+
+            var areaConhecimento = await _areaConhecimentoService.BuscarAreaConhecimento(publicacao.IdAreaConhecimento);
+
+            if (areaConhecimento == null)
+                throw new Exception("Area conhecimento não cadastrada.");
+
+
             var pub = _mapper.Map<Publicacao>(publicacao);
-            return _publicacaoRepository.CadastrarPublicacao(pub);
+
+            pub.TipoPublicacao = tipoPublicacao;
+            pub.Editora = editora;
+            pub.AreaConhecimento = areaConhecimento;
+
+            await _publicacaoRepository.CadastrarPublicacao(pub);
         }
 
-        public Task<IEnumerable<Publicacao>> ListarPublicacao()
+        public async Task<IEnumerable<Publicacao>> ListarPublicacao()
         {
-            return _publicacaoRepository.ListarPublicacao();
+            return await _publicacaoRepository.ListarPublicacao();
         }
 
-        public Task RemoverPublicacao(int id)
+        public async Task RemoverPublicacao(int id)
         {
-            return _publicacaoRepository.RemoverPublicacao(id);
+            await _publicacaoRepository.RemoverPublicacao(id);
         }
     }
 }

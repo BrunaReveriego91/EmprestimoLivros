@@ -8,6 +8,6 @@ namespace EmprestimoLivros.Infra.Data.Interfaces
         Task<Editora> BuscarEditora(int id);
         Task CadastrarEditora(Editora editora);
         Task AlterarEditora(Editora editora);
-        Task ExcluirEditora(int id);
+        Task RemoverEditora(int id);
     }
 }

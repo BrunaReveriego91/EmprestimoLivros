@@ -10,8 +10,8 @@
         public AreaConhecimento AreaConhecimento { get; set; }
         public DateTime AnoDeLancamento { get; set; }
         public string ISBN { get; set; }
-        public string Descricao {  get; set; }
-        public string Tags { get; set; }
+        public string? Descricao {  get; set; }
+        public string? Tags { get; set; }
 
     }
 }
