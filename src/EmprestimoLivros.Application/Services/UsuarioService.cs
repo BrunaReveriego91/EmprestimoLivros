@@ -25,6 +25,11 @@ namespace EmprestimoLivros.Application.Services
             return usuario;
         }
 
+        public async Task<Usuario> BuscarUsuarioPorMatricula(string matricula)
+        {
+            return await _usuarioRepository.BuscarUsuarioPorMatricula(matricula);
+        }
+
         public async Task CadastrarUsuario(CadastrarUsuarioRequestDTO usuarioDTO)
         {
             if (usuarioDTO == null)

@@ -2,6 +2,7 @@
 using EmprestimoLivros.Application.DTOs.AreaConhecimento.Request;
 using EmprestimoLivros.Application.DTOs.Autenticar;
 using EmprestimoLivros.Application.DTOs.Editora.Request;
+using EmprestimoLivros.Application.DTOs.Emprestimo.Request;
 using EmprestimoLivros.Application.DTOs.Publicacao.Request;
 using EmprestimoLivros.Application.DTOs.TipoPublicacao.Request;
 using EmprestimoLivros.Application.DTOs.Usuario.Request;
@@ -39,6 +40,11 @@ namespace EmprestimoLivros.Application.Mappings.AutoMapperConfig
                 cfg.CreateMap<CadastrarTipoPublicacaoRequestDTO, TipoPublicacao>();
                 cfg.CreateMap<CadastrarUsuarioRequestDTO, Usuario>();
                 cfg.CreateMap<UsuarioLoginDTO, UsuarioLogin>();
+
+                cfg.CreateMap<CadastrarEmprestimoRequestDTO, Emprestimo>()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
+                .ForMember(dest => dest.DataEmprestimo, opt => opt.MapFrom(src => src.DataEmprestimo))
+                .ForMember(dest => dest.DataDevolucao, opt => opt.MapFrom(src => src.DataDevolucao));
             });
 
             IMapper mapper = config.CreateMapper();

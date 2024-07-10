@@ -2,7 +2,7 @@
 {
     public class CadastrarEmprestimoRequestDTO
     {
-        public int IdEmprestimo { get; set; }
+        public int Id { get; set; }
         public string Matricula { get; set; }
         public int IdPublicacao { get; set; }
         public DateTime DataEmprestimo { get; set; }

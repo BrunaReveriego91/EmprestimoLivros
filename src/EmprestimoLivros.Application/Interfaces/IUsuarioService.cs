@@ -8,5 +8,6 @@ namespace EmprestimoLivros.Application.Interfaces
         Task<IEnumerable<Usuario>> ListarUsuarios();
         Task<Usuario> BuscarUsuario(int id);
         Task CadastrarUsuario(CadastrarUsuarioRequestDTO usuarioDTO);
+        Task<Usuario> BuscarUsuarioPorMatricula(string matricula);
     }
 }

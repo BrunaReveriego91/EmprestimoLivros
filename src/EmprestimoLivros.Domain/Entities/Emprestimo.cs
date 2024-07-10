@@ -1,8 +1,8 @@
-﻿namespace EmprestimoLivros.Domain.Entities
+﻿    namespace EmprestimoLivros.Domain.Entities
 {
     public class Emprestimo
     {
-        public int IdEmprestimo { get; set; }
+        public int Id { get; set; }
         public Usuario Usuario { get; set; }
         public Publicacao Publicacao { get; set; }
         public DateTime DataEmprestimo { get; set; }
