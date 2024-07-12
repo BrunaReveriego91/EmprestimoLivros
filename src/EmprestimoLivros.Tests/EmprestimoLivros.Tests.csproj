@@ -27,4 +27,8 @@
     <ProjectReference Include="..\EmprestimoLivros.Domain\EmprestimoLivros.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Fixture\Requests\" />
+  </ItemGroup>
+
 </Project>
