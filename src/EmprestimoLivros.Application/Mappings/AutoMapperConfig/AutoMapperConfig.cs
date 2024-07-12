@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using EmprestimoLivros.Application.DTOs.Autenticar;
 using EmprestimoLivros.Application.DTOs.Editora.Request;
 using EmprestimoLivros.Application.DTOs.Titulo.Request;
 using EmprestimoLivros.Domain.Entities;
@@ -24,6 +25,10 @@ namespace EmprestimoLivros.Application.Mappings.AutoMapperConfig
                 .ForMember(dest => dest.ISBN, opt => opt.MapFrom(src => src.ISBN))
                 .ForMember(dest => dest.Descricao, opt => opt.MapFrom(src => src.Descricao))
                 .ForMember(dest => dest.GeneroTitulo, opt => opt.MapFrom(src => src.GeneroTitulo));
+
+                cfg.CreateMap<UsuarioLoginDTO, UsuarioLogin>()
+                .ForMember(dest => dest.Login, opt => opt.MapFrom(src => src.Login))
+                .ForMember(dest => dest.Password, opt => opt.MapFrom(src => src.Password));
             });
 
             IMapper mapper = config.CreateMapper();
