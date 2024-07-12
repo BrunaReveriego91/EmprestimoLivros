@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using EmprestimoLivros.Application.DTOs.Publicacao.Request;
 using EmprestimoLivros.Application.Interfaces;
+using EmprestimoLivros.Application.Validator;
 using EmprestimoLivros.Domain.Entities;
 using EmprestimoLivros.Infra.Data.Interfaces;
 
@@ -13,17 +14,22 @@ namespace EmprestimoLivros.Application.Services
         private readonly IAreaConhecimentoService _areaConhecimentoService;
         private readonly ITipoPublicacaoService _tipoPublicacaoService;
         private readonly IPublicacaoRepository _publicacaoRepository;
-        public PublicacaoService(IMapper mapper, IPublicacaoRepository publicacaoRepository, IEditoraService editoraService, IAreaConhecimentoService areaConhecimentoService, ITipoPublicacaoService tipoPublicacaoService)
+        private readonly PublicacaoValidator _publicacaoValidator;
+
+        public PublicacaoService(IMapper mapper, IPublicacaoRepository publicacaoRepository, IEditoraService editoraService, IAreaConhecimentoService areaConhecimentoService, ITipoPublicacaoService tipoPublicacaoService, PublicacaoValidator publicacaoValidator)
         {
             _mapper = mapper;
             _publicacaoRepository = publicacaoRepository;
             _editoraService = editoraService;
             _areaConhecimentoService = areaConhecimentoService;
             _tipoPublicacaoService = tipoPublicacaoService;
+            _publicacaoValidator = publicacaoValidator;
         }
 
         public async Task<Publicacao> BuscarPublicacao(int id)
         {
+            await _publicacaoValidator.ValidaId(id);
+
             return await _publicacaoRepository.BuscarPublicacao(id);
         }
 

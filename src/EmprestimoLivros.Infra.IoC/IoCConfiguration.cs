@@ -29,6 +29,7 @@ namespace EmprestimoLivros.Infra.IoC
             services.AddScoped<TituloValidator>();
             services.AddScoped<UsuarioValidator>();
             services.AddScoped<TipoPublicacaoValidator>();
+            services.AddScoped<AreaConhecimentoValidator>();
             services.AddScoped<PublicacaoValidator>();
             services.AddScoped<IEditoraService, EditoraService>();
             services.AddScoped<IUsuarioService, UsuarioService>();

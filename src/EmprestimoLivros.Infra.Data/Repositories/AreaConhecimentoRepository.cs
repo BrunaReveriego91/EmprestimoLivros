@@ -2,11 +2,6 @@
 using EmprestimoLivros.Infra.Data.Context;
 using EmprestimoLivros.Infra.Data.Interfaces;
 using MongoDB.Driver;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EmprestimoLivros.Infra.Data.Repositories
 {
@@ -18,15 +13,15 @@ namespace EmprestimoLivros.Infra.Data.Repositories
             _context = context;
         }
 
-        public Task<AreaConhecimento> BuscarAreaConhecimento(int Id)
+        public async Task<AreaConhecimento> BuscarAreaConhecimento(int Id)
         {
             var filter = Builders<AreaConhecimento>.Filter.Eq(a => a.Id, Id);
-            return _context.AreaConhecimento.Find(filter).FirstAsync();
+            return await _context.AreaConhecimento.Find(filter).FirstOrDefaultAsync();
         }
 
-        public Task CadastrarAreaConheicmento(AreaConhecimento areaConhecimento)
+        public async Task CadastrarAreaConheicmento(AreaConhecimento areaConhecimento)
         {
-            return _context.AreaConhecimento.InsertOneAsync(areaConhecimento);
+            await _context.AreaConhecimento.InsertOneAsync(areaConhecimento);
         }
 
         public async Task<IEnumerable<AreaConhecimento>> ListarTodasAreas()
@@ -34,9 +29,9 @@ namespace EmprestimoLivros.Infra.Data.Repositories
             return await _context.AreaConhecimento.Find(e => true).ToListAsync();
         }
 
-        public Task RemoverAreaConhecimento(int Id)
+        public async Task RemoverAreaConhecimento(int Id)
         {
-            return _context.AreaConhecimento.FindOneAndDeleteAsync(e => e.Id == Id);
+            await _context.AreaConhecimento.FindOneAndDeleteAsync(e => e.Id == Id);
         }
     }
 }
