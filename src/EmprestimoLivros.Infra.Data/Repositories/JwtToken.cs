@@ -22,22 +22,25 @@ namespace EmprestimoLivros.Infra.Data.Repositories
         public string GenerateToken(Usuario usuario)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes(_settings.Secret);
-            List<Claim> claims = new()
-            {
-                new Claim("Nome", usuario.Nome.ToString()),
-                new Claim(ClaimTypes.Role, usuario.Role),                
-            };
+            var key = Encoding.UTF8.GetBytes("s3cR3tK3yW1thSp3c1@lCh@r@cter$123!");
+            var issuer = "FiapTechChallenge"; // Certifique-se de que este valor é o mesmo configurado no TokenValidationParameters
+            var audience = "yourAudience"; // Certifique-se de que este valor é o mesmo configurado no TokenValidationParameters
 
             var tokenDescriptor = new SecurityTokenDescriptor
             {
-                Subject = new ClaimsIdentity(claims),
-                Expires = DateTime.UtcNow.AddMinutes(60),
-                Issuer = "FiapTechChallenge",
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+                Subject = new ClaimsIdentity(new Claim[]
+                {
+                new Claim(ClaimTypes.Name, usuario.Nome)
+                }),
+                Expires = DateTime.UtcNow.AddHours(1),
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature),
+                Issuer = issuer,
+                Audience = audience
             };
+
             var token = tokenHandler.CreateToken(tokenDescriptor);
-            return tokenHandler.WriteToken(token);
+            var tokenString = tokenHandler.WriteToken(token);
+            return tokenString;
         }
     }
 }

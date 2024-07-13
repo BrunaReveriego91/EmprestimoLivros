@@ -2,10 +2,12 @@
 using EmprestimoLivros.Application.DTOs.Usuario.Request;
 using EmprestimoLivros.Application.Interfaces;
 using EmprestimoLivros.Application.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EmprestimoLivros.API.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("[controller]")]
     public class UsuarioController : ControllerBase
@@ -48,7 +50,7 @@ namespace EmprestimoLivros.API.Controllers
             try
             {
                 await _usuarioService.CadastrarUsuario(usuarioDTO);
-                return Ok();
+                return Ok("Usuário cadastrado com sucesso");
             }
             catch (Exception ex)
             {

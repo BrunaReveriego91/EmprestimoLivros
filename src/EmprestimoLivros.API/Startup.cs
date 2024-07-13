@@ -1,6 +1,15 @@
 ﻿using EmprestimoLivros.Infra.Data.Configuration;
+using EmprestimoLivros.Infra.Data.Interfaces;
+using EmprestimoLivros.Infra.Data.Repositories;
 using EmprestimoLivros.Infra.IoC;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Newtonsoft.Json.Linq;
+using System.Reflection.Metadata;
+using System.Text;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace EmprestimosLivros.API
 {
@@ -15,35 +24,51 @@ namespace EmprestimosLivros.API
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();
+            services.AddControllers();
 
+            services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = false,
+                    ValidateAudience = false,
+                    ValidateLifetime = false,
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("s3cR3tK3yW1thSp3c1@lCh@r@cter$123!"))
+                };
+            });
+
+            services.AddAuthorization();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Minha API", Version = "v1" });
-                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "APITechChallenge", Version = "v1" });
+
+                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
                 {
-                    Description = @"JWT Authorization header using the Bearer scheme. \r\n\r\n 
-                      Enter 'Bearer' [space] and then your token in the text input below.
-                      \r\n\r\nExample: 'Bearer 12345abcdef'",
                     Name = "Authorization",
-                    In = ParameterLocation.Header,
                     Type = SecuritySchemeType.ApiKey,
                     Scheme = "Bearer",
-                    BearerFormat = "JWT"
+                    BearerFormat = "JWT",
+                    In = ParameterLocation.Header,
+                    Description = "JWT Authorization header using the Bearer scheme.Bearer [space] and then your token in the text input below. Example: Bearer 12345abcdef",
                 });
-
                 c.AddSecurityRequirement(new OpenApiSecurityRequirement
                 {
                     {
-                        new OpenApiSecurityScheme
-                        {
-                            Reference = new OpenApiReference
-                            {
-                                Type = ReferenceType.SecurityScheme,
-                                Id= "Bearer"
-                            }
-                        },
-                    Array.Empty<string>()
+                          new OpenApiSecurityScheme
+                          {
+                              Reference = new OpenApiReference
+                              {
+                                  Type = ReferenceType.SecurityScheme,
+                                  Id = "Bearer"
+                              }
+                          },
+                         new string[] {}
                     }
                 });
             });
@@ -56,7 +81,6 @@ namespace EmprestimosLivros.API
             IoCConfiguration.ConfigureService(services);
             IoCConfiguration.ConfigureAutoMapper(services);
 
-
         }
 
 
@@ -64,34 +88,23 @@ namespace EmprestimosLivros.API
         {
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage(); // Página de exceção detalhada para ambiente de desenvolvimento.
                 app.UseSwagger();
-                app.UseSwaggerUI(c =>
-                {
-                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Minha API V1");
-                });
+                app.UseSwaggerUI();
+                app.UseDeveloperExceptionPage();
+            }
 
-            }
-            else
-            {
-               
-                app.UseExceptionHandler("/Error");
-                app.UseHsts();
-            }
 
             app.UseHttpsRedirection();
 
-            app.UseStaticFiles();
-
             app.UseRouting();
 
-            // Middleware para autorização (por exemplo, autenticação de usuário).
+            app.UseAuthentication();
             app.UseAuthorization();
 
-            // Middleware para endpoint de controle de ações (por exemplo, MVC controllers).
+
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers(); // Mapeia os controllers MVC.
+                endpoints.MapControllers();
             });
         }
 

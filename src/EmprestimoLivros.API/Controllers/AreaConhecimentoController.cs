@@ -1,9 +1,12 @@
 ﻿using EmprestimoLivros.Application.DTOs.AreaConhecimento.Request;
 using EmprestimoLivros.Application.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EmprestimoLivros.API.Controllers
 {
+
+    [Authorize]
     [ApiController]
     [Route("[controller]")]
     public class AreaConhecimentoController : ControllerBase
@@ -27,6 +30,7 @@ namespace EmprestimoLivros.API.Controllers
             }
             
         }
+
 
         [HttpPost]
         [Route("{Id}")]

@@ -32,17 +32,17 @@ namespace EmprestimoLivros.Application.Services
             return usuario;
         }
 
-        public Task CadastrarUsuario(CadastrarUsuarioRequestDTO usuarioDTO)
+        public async Task CadastrarUsuario(CadastrarUsuarioRequestDTO usuarioDTO)
         {   
             if (usuarioDTO == null)
                 throw new Exception("Dados inválidos");
 
-            var usuarioMatricula = _usuarioRepository.BuscarUsuarioPorMatricula(usuarioDTO.Matricula);
+            Usuario usuarioMatricula = await _usuarioRepository.BuscarUsuarioPorMatricula(usuarioDTO.Matricula);
             if (usuarioMatricula != null)
                 throw new Exception("Usuário já está cadastrado no sistema");
 
             Usuario usuario = _mapper.Map<Usuario>(usuarioDTO);
-            return _usuarioRepository.CadastrarUsuario(usuario);
+            _usuarioRepository.CadastrarUsuario(usuario);
         }
 
         public async Task<IEnumerable<Usuario>> ListarUsuarios()

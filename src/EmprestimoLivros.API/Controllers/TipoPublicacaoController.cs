@@ -2,11 +2,12 @@
 using EmprestimoLivros.Application.DTOs.Usuario.Request;
 using EmprestimoLivros.Application.Interfaces;
 using EmprestimoLivros.Application.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EmprestimoLivros.API.Controllers
 {
-
+    [Authorize]
     [ApiController]
     [Route("[controller]")]
     public class TipoPublicacaoController : ControllerBase
