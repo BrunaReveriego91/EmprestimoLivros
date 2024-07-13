@@ -18,7 +18,7 @@ Projeto de conclusão da Fase 4 da Pós Tech Fiap Curso de Arquitetura de Sistem
 
 Requisitos
 1.	Requisitos Funcionais
-O sistema de empréstimo de livros terá um API que será responsável pelas regras de negócio e uma interface Web se comunicará com a API para exibição dos dados. 
+O sistema de empréstimo de livros terá um API que será responsável pelas regras de negócio. 
     
     1. Lista de requisitos obrigatórios
     2. Login do sistema
