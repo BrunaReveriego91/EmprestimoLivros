@@ -14,7 +14,7 @@ namespace EmprestimoLivros.Application.Services
             _jwtToken = jwtToken;
         }
 
-        public async Task<string> Autenticar(UsuarioLogin usuarioLogin)
+        public async Task<string> Autenticar(Usuario usuarioLogin)
         {
             if (usuarioLogin.Login == null)
                 throw new Exception("Login não pode ser nulo");

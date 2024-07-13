@@ -33,6 +33,10 @@ namespace EmprestimoLivros.Application.Mappings.AutoMapperConfig
                 .ForMember(dest => dest.Login, opt => opt.MapFrom(src => src.Login))
                 .ForMember(dest => dest.Password, opt => opt.MapFrom(src => src.Password));
 
+                cfg.CreateMap<UsuarioLoginDTO, Usuario>()
+                .ForMember(dest => dest.Login, opt => opt.MapFrom(src => src.Login))
+                .ForMember(dest => dest.Password, opt => opt.MapFrom(src => src.Password));
+
                 cfg.CreateMap<CadastrarAreaConhecimentoRequestDTO, AreaConhecimento>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
                 .ForMember(dest => dest.NomeArea, opt => opt.MapFrom(src => src.NomeArea));
@@ -71,6 +75,7 @@ namespace EmprestimoLivros.Application.Mappings.AutoMapperConfig
                 cfg.CreateMap<CadastrarTipoPublicacaoRequestDTO, TipoPublicacao>();
                 cfg.CreateMap<CadastrarUsuarioRequestDTO, Usuario>();
                 cfg.CreateMap<UsuarioLoginDTO, UsuarioLogin>();
+                cfg.CreateMap<UsuarioLoginDTO, Usuario>();
 
                 cfg.CreateMap<CadastrarEmprestimoRequestDTO, Emprestimo>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))

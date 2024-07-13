@@ -12,12 +12,14 @@ using System.Text.Json;
 
 namespace EmprestimosLivroFront.Services
 {
-    public class AuthenticationService : AuthenticationStateProvider
+    public class AuthenticationService
     {
         private readonly ILocalStorageService _localStorage;
         private readonly HttpClient _httpClient;
-        public AuthenticationService(ILocalStorageService localStorage, IHttpClientFactory httpFactory)
+        private readonly AuthProvider _authProvider;
+        public AuthenticationService(ILocalStorageService localStorage, IHttpClientFactory httpFactory, AuthProvider authProvider)
         {
+            _authProvider = authProvider;
             _localStorage = localStorage;
             _httpClient = httpFactory.CreateClient("TechChallenge");
         }
@@ -33,60 +35,14 @@ namespace EmprestimosLivroFront.Services
             if (response.IsSuccessStatusCode)
             {
                 var token = await response.Content.ReadFromJsonAsync<TokenResponse>();
-                await _localStorage.SetItemAsync("authToken", token.Token);
-                NotifyAuthenticationStateChanged(GetAuthenticationStateAsync());
+                await _localStorage.SetItemAsync("authToken", token?.Token!);
+                await _authProvider.SetAuthenticationStateAsync(token.Token!);
                 return new AuthResponse { Sucesso = true };
             }
             return new AuthResponse { Sucesso = false, Error = ["Usuário ou senha inválidos"] };
         }
 
-        public override async Task<AuthenticationState> GetAuthenticationStateAsync()
-        {
-            var usuario = new ClaimsPrincipal();
-            var token = await _localStorage.GetItemAsync<string>("authToken");
-            if (!string.IsNullOrEmpty(token) && ValidateToken(token))
-            {
-                var identity = new ClaimsIdentity(ParseClaimsFromJwt(token));
-                _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
-                usuario = new ClaimsPrincipal(identity);
-            }
-            return new AuthenticationState(usuario);
-        }
-
-        private bool ValidateToken(string token)
-        {
-            var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.UTF8.GetBytes("VMYxQOHB4QwvCi8F0MGyUZJVSfKyoAqxKmJCudYihTzP0MG50sBv9CjLJHQLGk70KUM7rPQ7iuzBO6wcvD7eAx");
-            var issuer = "FiapTechChallenge";
-            var audience = "audiance";
-            var validationParameters = new TokenValidationParameters
-            {
-                ValidateIssuer = true,
-                ValidateAudience = true,
-                ValidateLifetime = true,
-                ValidateIssuerSigningKey = true,
-                ValidIssuer = issuer,
-                ValidAudience = audience,
-                IssuerSigningKey = new SymmetricSecurityKey(key)
-            };
-
-            try
-            {
-                tokenHandler.ValidateToken(token, validationParameters, out SecurityToken validatedToken);
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
-        }
-
-        private IEnumerable<Claim> ParseClaimsFromJwt(string jwt)
-        {
-            var handler = new JwtSecurityTokenHandler();
-            var token = handler.ReadJwtToken(jwt);
-            return token.Claims;
-        }
+       
 
     }
 }

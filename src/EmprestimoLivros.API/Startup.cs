@@ -8,9 +8,11 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json.Linq;
+using System.Collections.ObjectModel;
 using System.Reflection.Metadata;
 using System.Text;
 using static System.Net.Mime.MediaTypeNames;
+using static System.Net.WebRequestMethods;
 
 namespace EmprestimosLivros.API
 {
@@ -25,16 +27,23 @@ namespace EmprestimosLivros.API
 
         public void ConfigureServices(IServiceCollection services)
         {
+            string frontUrl = Configuration["FrontendUrl"] ?? "http://localhost:5104";
+            string backUrl = Configuration["BackendUrl"] ?? "https://localhost:7089";
+            Collection<string> urlCollections = new Collection<string>
+            {
+                frontUrl,
+                backUrl
+            };
+
             services.AddControllers();
             services.AddCors(options =>
             {
-                options.AddPolicy("AllowAllOrigins",
-                    builder =>
-                    {
-                        builder.AllowAnyOrigin()
-                               .AllowAnyHeader()
-                               .AllowAnyMethod();
-                    });
+                options.AddPolicy("wasm",
+                    policy => policy.WithOrigins(urlCollections.ToArray())
+                    .AllowAnyMethod()
+                    .SetIsOriginAllowed(pol => true)
+                    .AllowAnyHeader()
+                    .AllowCredentials());
             });
 
             services.AddAuthentication(options =>
@@ -113,7 +122,7 @@ namespace EmprestimosLivros.API
             app.UseHttpsRedirection();
 
             app.UseRouting();
-            app.UseCors("AllowAllOrigins");
+            app.UseCors("wasm");
             app.UseAuthentication();
             app.UseAuthorization();
 

@@ -9,6 +9,6 @@ namespace EmprestimoLivros.Infra.Data.Interfaces
 {
     public interface IAutenticarRepository
     {
-        Task<Usuario> Autenticar(UsuarioLogin usuarioLogin);
+        Task<Usuario> Autenticar(Usuario usuarioLogin);
     }
 }

@@ -14,18 +14,21 @@ builder.RootComponents.Add<HeadOutlet>("head::after");
 builder.Services.AddMudServices();
 
 builder.Services.AddAuthorizationCore();
-builder.Services.AddScoped<AuthenticationStateProvider, AuthenticationService>();
-builder.Services.AddScoped<AuthenticationService>(sp => 
-    (AuthenticationService) sp.GetRequiredService<AuthenticationStateProvider>());
 
-builder.Services.AddBlazoredLocalStorage();
+builder.Services.AddTransient<MiddlewareHandler>();
+builder.Services.AddScoped<AuthenticationService>();
+builder.Services.AddScoped<AuthProvider>();
+builder.Services.AddScoped<AuthenticationStateProvider>(provider => provider.GetRequiredService<AuthProvider>());
+
+
 
 builder.Services.AddHttpClient("TechChallenge", (config) =>
 {    
     config.BaseAddress = new Uri(builder.Configuration["APIServer:Url"]!);
     config.DefaultRequestHeaders.Add("Accept", "application/json");
-});
+}).AddHttpMessageHandler<MiddlewareHandler>();
 
+builder.Services.AddBlazoredLocalStorage();
 
 await builder.Build().RunAsync();
 

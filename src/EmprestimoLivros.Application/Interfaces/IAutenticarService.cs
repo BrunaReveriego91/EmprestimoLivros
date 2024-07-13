@@ -10,6 +10,6 @@ namespace EmprestimoLivros.Application.Interfaces
 {
     public interface IAutenticarService
     {
-        Task<string> Autenticar(UsuarioLogin usuarioLogin);
+        Task<string> Autenticar(Usuario usuarioLogin);
     }
 }

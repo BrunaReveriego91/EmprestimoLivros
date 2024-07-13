@@ -13,7 +13,7 @@ namespace EmprestimoLivros.Infra.Data.Repositories
             _context = context;
         }
 
-        public async Task<Usuario> Autenticar(UsuarioLogin usuarioLogin)
+        public async Task<Usuario> Autenticar(Usuario usuarioLogin)
         {
             var builder = Builders<Usuario>.Filter;
             var filter = builder.Eq(e => e.Login, usuarioLogin.Login) & builder.Eq(e => e.Password, usuarioLogin.Password);            

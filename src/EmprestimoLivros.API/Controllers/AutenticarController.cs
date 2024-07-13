@@ -23,7 +23,7 @@ namespace EmprestimoLivros.API.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Autenticar(UsuarioLoginDTO usuarioLogin)
         {
-            UsuarioLogin user = _mapper.Map<UsuarioLogin>(usuarioLogin);
+            Usuario user = _mapper.Map<Usuario>(usuarioLogin);
             string token = await _autenticarService.Autenticar(user);
             return Ok(new { Token = token });
         }
