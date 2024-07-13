@@ -12,7 +12,7 @@
             get
             {
                 if (string.IsNullOrEmpty(User) || string.IsNullOrEmpty(Password))
-                    return $@"mongodb://{Host}:{Port}";
+                    return $@"mongodb://localhost:27017";
 
                 return $@"mongodb://{User}:{Password}@{Host}:{Port}";
             }
