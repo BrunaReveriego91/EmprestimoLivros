@@ -31,7 +31,7 @@ namespace EmprestimoLivros.API.Controllers
             
         }
 
-        [HttpPost]
+        [HttpGet]
         [Route("{Id}")]
         public async Task<IActionResult> BuscarAreaConhecimento(int Id)
         {
