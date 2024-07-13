@@ -19,15 +19,16 @@ Projeto de conclusão da Fase 4 da Pós Tech Fiap Curso de Arquitetura de Sistem
 Requisitos
 1.	Requisitos Funcionais
 O sistema de empréstimo de livros terá um API que será responsável pelas regras de negócio e uma interface Web se comunicará com a API para exibição dos dados. 
-1.1.	Lista de requisitos obrigatórios
-1.1.1. Login do sistema
-1.1.2. Cadastro de usuários
-1.1.3. Cadastro de Editora
-1.1.4. Cadastro de área de conhecimento
-1.1.5. Cadastro de tipo de publicações
-1.1.6. Cadastro de publicações 
-1.1.7. Cadastro de empréstimos
-1.1.8. Cadastro de reserva de livros
+    
+    1. Lista de requisitos obrigatórios
+    2. Login do sistema
+    3. Cadastro de usuários
+    4. Cadastro de Editora
+    5. Cadastro de área de conhecimento
+    6. Cadastro de tipo de publicações
+    7. Cadastro de publicações 
+    8. Cadastro de empréstimos
+    9. Cadastro de reserva de livros
 
 ## Instalar MongoDB
 
