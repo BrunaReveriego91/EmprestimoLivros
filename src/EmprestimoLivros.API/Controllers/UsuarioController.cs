@@ -58,5 +58,19 @@ namespace EmprestimoLivros.API.Controllers
             }
 
         }
+        [HttpDelete("{Id}")]
+        public async Task<IActionResult> DeletarUsuario(int Id)
+        {
+            try
+            {
+                await _usuarioService.DeletarUsuario(Id);
+                return Ok("Usuário deletado com sucesso");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+        }
     }
 }

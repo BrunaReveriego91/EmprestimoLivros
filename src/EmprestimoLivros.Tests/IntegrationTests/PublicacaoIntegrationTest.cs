@@ -17,7 +17,7 @@ namespace EmprestimoLivros.Tests.IntegrationTests
 
         protected async Task<string> CriarPublicacaoValidaAsync()
         {
-            var token = await ObterTokenAutenticacaoAsync("admin", "admin");
+            var token = await ObterTokenAutenticacaoAsync();
             DefinirAutenticacaoHeader(token);
 
             var publicacaoDTO = new CadastrarPublicacaoRequestDTO
@@ -54,7 +54,7 @@ namespace EmprestimoLivros.Tests.IntegrationTests
         public async Task ListarPublicacoesDeveRetornarHttpStatusOK(string url)
         {
             // Arrange
-            var token = await ObterTokenAutenticacaoAsync("admin", "admin");
+            var token = await ObterTokenAutenticacaoAsync();
             DefinirAutenticacaoHeader(token);
 
             // Act
@@ -62,6 +62,7 @@ namespace EmprestimoLivros.Tests.IntegrationTests
 
             // Assert
             Assert.True(response.IsSuccessStatusCode);
+            await DeletarAdminAsync(token);
         }
 
         [Theory]
@@ -69,7 +70,7 @@ namespace EmprestimoLivros.Tests.IntegrationTests
         public async Task BuscarPublicacaoPorIdDeveRetornarHttpStatusOK(string url)
         {
             // Arrange
-            var token = await ObterTokenAutenticacaoAsync("admin", "admin");
+            var token = await ObterTokenAutenticacaoAsync();
             DefinirAutenticacaoHeader(token);
 
             // Act
@@ -86,13 +87,14 @@ namespace EmprestimoLivros.Tests.IntegrationTests
             {
                 Assert.True(response.StatusCode == HttpStatusCode.NoContent || response.StatusCode == HttpStatusCode.OK);
             }
+            await DeletarAdminAsync(token);
         }
         [Theory]
         [InlineData("/Publicacao/{id}")]
         public async Task BuscarPublicacaoPorIdInvalidoDeveRetornarBadRequest(string url)
         {
             // Arrange
-            var token = await ObterTokenAutenticacaoAsync("admin", "admin");
+            var token = await ObterTokenAutenticacaoAsync();
             DefinirAutenticacaoHeader(token);
 
             // Act
@@ -101,6 +103,7 @@ namespace EmprestimoLivros.Tests.IntegrationTests
 
             // Assert
             Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
+            await DeletarAdminAsync(token);
         }
     }
 }

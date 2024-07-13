@@ -15,7 +15,7 @@ namespace EmprestimoLivros.Tests.IntegrationTests
         public async Task ListarEditorasDeveRetornarHttpStatusOK(string url)
         {
             // Arrange
-            var token = await ObterTokenAutenticacaoAsync("admin", "admin");
+            var token = await ObterTokenAutenticacaoAsync();
             DefinirAutenticacaoHeader(token);
 
             //Arrange & Act
@@ -23,6 +23,7 @@ namespace EmprestimoLivros.Tests.IntegrationTests
 
             //Assert
             Assert.True(response.StatusCode == HttpStatusCode.NoContent || response.StatusCode == HttpStatusCode.OK);
+            await DeletarAdminAsync(token);
         }
 
         [Theory]
@@ -30,7 +31,7 @@ namespace EmprestimoLivros.Tests.IntegrationTests
         public async Task BuscarEditoraPorIdDeveRetornarHttpStatusOK(string url)
         {
             // Arrange
-            var token = await ObterTokenAutenticacaoAsync("admin", "admin");
+            var token = await ObterTokenAutenticacaoAsync();
             DefinirAutenticacaoHeader(token);
 
             //Arrange & Act
@@ -47,6 +48,7 @@ namespace EmprestimoLivros.Tests.IntegrationTests
             {
                 Assert.True(response.StatusCode == HttpStatusCode.NoContent || response.StatusCode == HttpStatusCode.OK);
             }
+            await DeletarAdminAsync(token);
         }
 
         [Theory]
@@ -54,7 +56,7 @@ namespace EmprestimoLivros.Tests.IntegrationTests
         public async Task BuscarEditoraPorIdDeveRetornarBadRequest(string url)
         {
             // Arrange
-            var token = await ObterTokenAutenticacaoAsync("admin", "admin");
+            var token = await ObterTokenAutenticacaoAsync();
             DefinirAutenticacaoHeader(token);
 
             //Arrange & Act
@@ -64,6 +66,7 @@ namespace EmprestimoLivros.Tests.IntegrationTests
 
             //Assert
             Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
+            await DeletarAdminAsync(token);
         }
     }
 }
