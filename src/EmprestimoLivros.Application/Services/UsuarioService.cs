@@ -47,5 +47,10 @@ namespace EmprestimoLivros.Application.Services
         {
             return await _usuarioRepository.ListarUsuarios();
         }
+
+        public async Task DeletarUsuario(int Id)
+        {
+            await _usuarioRepository.DeletarUsuario(Id);
+        }
     }
 }

@@ -12,7 +12,7 @@ namespace EmprestimoLivros.Infra.Data.Interfaces
         Task<IEnumerable<Usuario>> ListarUsuarios();
         Task<Usuario> BuscarUsuario(int id);
         Task CadastrarUsuario(Usuario usuario);
-
         Task<Usuario> BuscarUsuarioPorMatricula(string matricula);
+        Task DeletarUsuario(int Id);
     }
 }

@@ -62,5 +62,9 @@ namespace EmprestimoLivros.Infra.Data.Repositories
                 throw new Exception(ex.Message);
             }            
         }
+        public Task DeletarUsuario(int Id)
+        {
+            return _context.Usuarios.FindOneAndDeleteAsync(e => e.Id == Id);
+        }
     }
 }
