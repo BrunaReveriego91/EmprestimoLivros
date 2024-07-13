@@ -23,7 +23,13 @@ namespace EmprestimoLivros.Application.Services
         public async Task<TipoPublicacao> BuscarTipoPublicacaoPorId(int id)
         {
             await _tipoPublicacaoValidator.ValidaId(id);
-            return await _tipoPublicacaoRepository.BuscarTipoPublicacaoPorId(id);
+
+            var tipoPublicacao = await _tipoPublicacaoRepository.BuscarTipoPublicacaoPorId(id);
+
+            if (tipoPublicacao == null)
+                throw new Exception($"Tipo de publicação com o ID {id} não encontrada.");
+
+            return tipoPublicacao;
         }
 
         public async Task CadastrarTipoPublicacao(CadastrarTipoPublicacaoRequestDTO tipoPublicacao)

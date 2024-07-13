@@ -30,7 +30,12 @@ namespace EmprestimoLivros.Application.Services
         {
             await _publicacaoValidator.ValidaId(id);
 
-            return await _publicacaoRepository.BuscarPublicacao(id);
+            var publicacao = await _publicacaoRepository.BuscarPublicacao(id);
+
+            if (publicacao == null)
+                    throw new Exception($"Publicação com o ID {id} não encontrada.");
+
+            return publicacao;
         }
 
         public async Task CadastrarPublicacao(CadastrarPublicacaoRequestDTO publicacao)

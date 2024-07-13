@@ -4,6 +4,7 @@ using EmprestimoLivros.Application.Interfaces;
 using EmprestimoLivros.Application.Validator;
 using EmprestimoLivros.Domain.Entities;
 using EmprestimoLivros.Infra.Data.Interfaces;
+using EmprestimoLivros.Infra.Data.Repositories;
 
 namespace EmprestimoLivros.Application.Services
 {
@@ -25,10 +26,15 @@ namespace EmprestimoLivros.Application.Services
             return await _areaConhecimentoRepository.BuscarAreaConhecimento(Id);
         }
 
-        public async Task CadastrarAreaConheicmento(CadastrarAreaConhecimentoRequestDTO areaConhecimento)
+        public async Task CadastrarAreaConheicmento(CadastrarAreaConhecimentoRequestDTO areaConhecimentoDTO)
         {
-            await _acValidator.validaCamposAreaConhecimento(areaConhecimento);
-            AreaConhecimento ac = _mapper.Map<AreaConhecimento>(areaConhecimento);
+            var areaConhecimento = await _areaConhecimentoRepository.BuscarAreaConhecimento(areaConhecimentoDTO.Id);
+
+            if (areaConhecimento != null)
+                throw new Exception("Id já cadastrado.");
+
+            await _acValidator.validaCamposAreaConhecimento(areaConhecimentoDTO);
+            AreaConhecimento ac = _mapper.Map<AreaConhecimento>(areaConhecimentoDTO);
             await _areaConhecimentoRepository.CadastrarAreaConheicmento(ac);
         }
 
@@ -39,6 +45,11 @@ namespace EmprestimoLivros.Application.Services
 
         public async Task RemoverAreaConhecimento(int Id)
         {
+            var areaConhecimento = await _areaConhecimentoRepository.BuscarAreaConhecimento(Id);
+
+            if (areaConhecimento == null)
+                throw new Exception("Id não existe.");
+
             await _areaConhecimentoRepository.RemoverAreaConhecimento(Id);
         }
     }
