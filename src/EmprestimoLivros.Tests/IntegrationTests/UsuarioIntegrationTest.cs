@@ -4,19 +4,21 @@ using System.Net;
 
 namespace EmprestimoLivros.Tests.IntegrationTests
 {
-    public class EditoraIntegrationTest : IClassFixture<WebApplicationFactory<Startup>>
+    public class UsuarioIntegrationTest : IClassFixture<WebApplicationFactory<Startup>>
     {
         readonly HttpClient _httpClient;
-        public EditoraIntegrationTest(WebApplicationFactory<Startup> fixture)
+
+        public UsuarioIntegrationTest(WebApplicationFactory<Startup> fixture)
         {
             _httpClient = fixture.CreateClient();
         }
 
+
         [Theory]
-        [InlineData("/Editora")]
-        public async Task ListarEditorasDeveRetornarHttpStatusOK(string url)
+        [InlineData("/Usuario")]
+        public async Task ListarUsuariosDeveRetornarHttpStatusOK(string url)
         {
-            //Arrange & Act
+            //Arrange & Act                     
             var response = await _httpClient.GetAsync(url);
 
             //Assert
@@ -24,8 +26,8 @@ namespace EmprestimoLivros.Tests.IntegrationTests
         }
 
         [Theory]
-        [InlineData("/Editora/{id}")]
-        public async Task BuscarEditoraPorIdDeveRetornarHttpStatusOK(string url)
+        [InlineData("/Usuario/{id}")]
+        public async Task BuscarUsuarioPorIdDeveRetornarHttpStatusOK(string url)
         {
             //Arrange & Act
             var id = "1";
@@ -37,8 +39,8 @@ namespace EmprestimoLivros.Tests.IntegrationTests
         }
 
         [Theory]
-        [InlineData("/Editora/{id}")]
-        public async Task BuscarEditoraPorIdDeveRetornarBadRequest(string url)
+        [InlineData("/Usuario/{id}")]
+        public async Task BuscarUsuarioPorIdDeveRetornarBadRequest(string url)
         {
             //Arrange & Act
             var id = "-1";
@@ -48,5 +50,6 @@ namespace EmprestimoLivros.Tests.IntegrationTests
             //Assert
             Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
         }
+
     }
 }

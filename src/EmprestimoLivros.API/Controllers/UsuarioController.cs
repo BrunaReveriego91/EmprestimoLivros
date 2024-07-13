@@ -1,8 +1,6 @@
-﻿using EmprestimoLivros.Application.DTOs.Titulo.Request;
-using EmprestimoLivros.Application.DTOs.Usuario.Request;
+﻿using EmprestimoLivros.Application.DTOs.Usuario.Request;
 using EmprestimoLivros.Application.Interfaces;
 using EmprestimoLivros.Application.Services;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EmprestimoLivros.API.Controllers
@@ -45,6 +43,7 @@ namespace EmprestimoLivros.API.Controllers
         }
 
         [HttpPost]
+        [AllowAnonymous]
         public async Task<IActionResult> CadastrarUsuario([FromBody] CadastrarUsuarioRequestDTO usuarioDTO)
         {
             try

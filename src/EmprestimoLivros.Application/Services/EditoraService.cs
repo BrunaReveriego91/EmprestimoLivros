@@ -20,6 +20,18 @@ namespace EmprestimoLivros.Application.Services
             _validator = validator;
         }
 
+        public async Task AlterarEditora(AlterarEditoraRequestDTO editoraDTO)
+        {
+            var editoraExistente = await _editoraRepository.BuscarEditora(editoraDTO.Id);
+
+            if (editoraExistente == null)
+                throw new Exception("Cadastro editora não localizado.");
+
+            var editora = await Task.Run(() => _mapper.Map<Editora>(editoraDTO));
+
+            await _editoraRepository.AlterarEditora(editora);
+        }
+
         public async Task<Editora> BuscarEditora(int id)
         {
             await _validator.ValidaId(id);
@@ -42,15 +54,20 @@ namespace EmprestimoLivros.Application.Services
             await _editoraRepository.CadastrarEditora(editora);
         }
 
+        public async Task RemoverEditora(int id)
+        {
+            var editoraExistente = await _editoraRepository.BuscarEditora(id);
+
+            if (editoraExistente == null)
+                throw new Exception("Cadastro editora não localizado.");
+
+            await _editoraRepository.RemoverEditora(id);
+        }
+
         public async Task<IEnumerable<Editora>> ListarEditoras()
         {
             return await _editoraRepository.ListarEditoras();
         }
 
-        public Task RemoverEditora(int id)
-        {
-            _validator.ValidaId(id);
-            return _editoraRepository.RemoverEditora(id);
-        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using EmprestimoLivros.Infra.Data.Configuration;
+﻿using EmprestimoLivros.Domain.Entities;
+using EmprestimoLivros.Infra.Data.Configuration;
 using EmprestimoLivros.Infra.Data.Interfaces;
 using EmprestimoLivros.Infra.Data.Repositories;
 using EmprestimoLivros.Infra.IoC;
@@ -76,6 +77,11 @@ namespace EmprestimosLivros.API
 
             services.Configure<MongoConfiguration>(
               Configuration.GetSection("MongoSettings"));
+
+            services.Configure<AppSettings>(
+                Configuration.GetSection("AppSettings"));
+
+
 
             IoCConfiguration.ConfigureRepository(services);
             IoCConfiguration.ConfigureService(services);

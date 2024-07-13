@@ -4,11 +4,6 @@ using EmprestimoLivros.Application.Interfaces;
 using EmprestimoLivros.Application.Validator;
 using EmprestimoLivros.Domain.Entities;
 using EmprestimoLivros.Infra.Data.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EmprestimoLivros.Application.Services
 {
@@ -25,26 +20,26 @@ namespace EmprestimoLivros.Application.Services
         }
 
         public async Task<AreaConhecimento> BuscarAreaConhecimento(int Id)
-        {            
+        {
             await _acValidator.ValidaId(Id);
             return await _areaConhecimentoRepository.BuscarAreaConhecimento(Id);
         }
 
-        public Task CadastrarAreaConheicmento(CadastrarAreaConhecimentoRequestDTO areaConhecimento)
+        public async Task CadastrarAreaConheicmento(CadastrarAreaConhecimentoRequestDTO areaConhecimento)
         {
-            _acValidator.validaCamposAreaConhecimento(areaConhecimento);
+            await _acValidator.validaCamposAreaConhecimento(areaConhecimento);
             AreaConhecimento ac = _mapper.Map<AreaConhecimento>(areaConhecimento);
-            return _areaConhecimentoRepository.CadastrarAreaConheicmento(ac);
+            await _areaConhecimentoRepository.CadastrarAreaConheicmento(ac);
         }
 
-        public Task<IEnumerable<AreaConhecimento>> ListarTodasAreas()
+        public async Task<IEnumerable<AreaConhecimento>> ListarTodasAreas()
         {
-            return _areaConhecimentoRepository.ListarTodasAreas();
+            return await _areaConhecimentoRepository.ListarTodasAreas();
         }
 
-        public Task RemoverAreaConhecimento(int Id)
+        public async Task RemoverAreaConhecimento(int Id)
         {
-            return _areaConhecimentoRepository.RemoverAreaConhecimento(Id);
+            await _areaConhecimentoRepository.RemoverAreaConhecimento(Id);
         }
     }
 }

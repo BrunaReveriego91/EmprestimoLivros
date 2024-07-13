@@ -7,6 +7,7 @@ namespace EmprestimoLivros.Infra.Data.Interfaces
         Task<IEnumerable<Editora>> ListarEditoras();
         Task<Editora> BuscarEditora(int id);
         Task CadastrarEditora(Editora editora);
+        Task AlterarEditora(Editora editora);
         Task RemoverEditora(int id);
     }
 }

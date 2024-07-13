@@ -1,8 +1,6 @@
 ﻿using EmprestimoLivros.Application.DTOs.TipoPublicacao.Request;
-using EmprestimoLivros.Application.DTOs.Usuario.Request;
 using EmprestimoLivros.Application.Interfaces;
 using EmprestimoLivros.Application.Services;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EmprestimoLivros.API.Controllers
@@ -27,11 +25,11 @@ namespace EmprestimoLivros.API.Controllers
 
         [HttpGet]
         [Route("{id}")]
-        public async Task<IActionResult> BuscarTipoPublicacao(string pub)
+        public async Task<IActionResult> BuscarTipoPublicacaoPorId(int id)
         {
             try
             {
-                var tipo = await _tipoPublicacaoService.BuscarTipoPublicacao(pub);
+                var tipo = await _tipoPublicacaoService.BuscarTipoPublicacaoPorId(id);
                 return Ok(tipo);
             }
             catch (ArgumentException ex)

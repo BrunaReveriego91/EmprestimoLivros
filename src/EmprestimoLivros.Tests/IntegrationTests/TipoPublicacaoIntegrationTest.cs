@@ -4,17 +4,18 @@ using System.Net;
 
 namespace EmprestimoLivros.Tests.IntegrationTests
 {
-    public class EditoraIntegrationTest : IClassFixture<WebApplicationFactory<Startup>>
+    public class TipoPublicacaoIntegrationTest : IClassFixture<WebApplicationFactory<Startup>>
     {
         readonly HttpClient _httpClient;
-        public EditoraIntegrationTest(WebApplicationFactory<Startup> fixture)
+
+        public TipoPublicacaoIntegrationTest(WebApplicationFactory<Startup> fixture)
         {
             _httpClient = fixture.CreateClient();
         }
 
         [Theory]
-        [InlineData("/Editora")]
-        public async Task ListarEditorasDeveRetornarHttpStatusOK(string url)
+        [InlineData("/TipoPublicacao")]
+        public async Task ListarTipoPublicacaoDeveRetornarHttpStatusOK(string url)
         {
             //Arrange & Act
             var response = await _httpClient.GetAsync(url);
@@ -24,8 +25,8 @@ namespace EmprestimoLivros.Tests.IntegrationTests
         }
 
         [Theory]
-        [InlineData("/Editora/{id}")]
-        public async Task BuscarEditoraPorIdDeveRetornarHttpStatusOK(string url)
+        [InlineData("/TipoPublicacao/{id}")]
+        public async Task BuscarTipoPublicacaoPorIdDeveRetornarHttpStatusOK(string url)
         {
             //Arrange & Act
             var id = "1";
@@ -37,8 +38,8 @@ namespace EmprestimoLivros.Tests.IntegrationTests
         }
 
         [Theory]
-        [InlineData("/Editora/{id}")]
-        public async Task BuscarEditoraPorIdDeveRetornarBadRequest(string url)
+        [InlineData("/TipoPublicacao/{id}")]
+        public async Task BuscarTipoPublicacaoPorIdDeveRetornarBadRequest(string url)
         {
             //Arrange & Act
             var id = "-1";

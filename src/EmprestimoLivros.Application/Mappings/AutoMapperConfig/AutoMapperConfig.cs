@@ -6,6 +6,10 @@ using EmprestimoLivros.Application.DTOs.Publicacao.Request;
 using EmprestimoLivros.Application.DTOs.TipoPublicacao.Request;
 using EmprestimoLivros.Application.DTOs.Titulo.Request;
 using EmprestimoLivros.Application.DTOs.Usuario.Request;
+using EmprestimoLivros.Application.DTOs.Emprestimo.Request;
+using EmprestimoLivros.Application.DTOs.Publicacao.Request;
+using EmprestimoLivros.Application.DTOs.TipoPublicacao.Request;
+using EmprestimoLivros.Application.DTOs.Usuario.Request;
 using EmprestimoLivros.Domain.Entities;
 
 namespace EmprestimoLivros.Application.Mappings.AutoMapperConfig
@@ -21,6 +25,10 @@ namespace EmprestimoLivros.Application.Mappings.AutoMapperConfig
                   .ForMember(dest => dest.CNPJ, opt => opt.MapFrom(src => src.CNPJ))
                   .ForMember(dest => dest.Nome, opt => opt.MapFrom(src => src.Nome));
 
+                cfg.CreateMap<AlterarEditoraRequestDTO, Editora>()
+                  .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
+                  .ForMember(dest => dest.CNPJ, opt => opt.MapFrom(src => src.CNPJ))
+                  .ForMember(dest => dest.Nome, opt => opt.MapFrom(src => src.Nome));
 
                 cfg.CreateMap<CadastrarTituloRequestDTO, Titulo>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
@@ -58,6 +66,25 @@ namespace EmprestimoLivros.Application.Mappings.AutoMapperConfig
                 .ForMember(dest => dest.Login, opt => opt.MapFrom(src => src.Login))
                 .ForMember(dest => dest.Password, opt => opt.MapFrom(src => src.Password))
                 .ForMember(dest => dest.Role, opt => opt.MapFrom(src => src.Role));
+                cfg.CreateMap<CadastrarPublicacaoRequestDTO, Publicacao>()
+                  .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
+                  .ForMember(dest => dest.Nome, opt => opt.MapFrom(src => src.Nome))
+                  .ForMember(dest => dest.Autor, opt => opt.MapFrom(src => src.Autor))
+                  .ForMember(dest => dest.AnoDeLancamento, opt => opt.MapFrom(src => src.AnoDeLancamento))
+                  .ForMember(dest => dest.ISBN, opt => opt.MapFrom(src => src.ISBN))
+                  .ForMember(dest => dest.Descricao, opt => opt.MapFrom(src => src.Descricao))
+                  .ForMember(dest => dest.Tags, opt => opt.MapFrom(src => src.Tags));
+
+                cfg.CreateMap<CadastrarUsuarioRequestDTO, Usuario>();
+                cfg.CreateMap<CadastrarAreaConhecimentoRequestDTO, AreaConhecimento>();
+                cfg.CreateMap<CadastrarTipoPublicacaoRequestDTO, TipoPublicacao>();
+                cfg.CreateMap<CadastrarUsuarioRequestDTO, Usuario>();
+                cfg.CreateMap<UsuarioLoginDTO, UsuarioLogin>();
+
+                cfg.CreateMap<CadastrarEmprestimoRequestDTO, Emprestimo>()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
+                .ForMember(dest => dest.DataEmprestimo, opt => opt.MapFrom(src => src.DataEmprestimo))
+                .ForMember(dest => dest.DataDevolucao, opt => opt.MapFrom(src => src.DataDevolucao));
             });
 
             IMapper mapper = config.CreateMapper();

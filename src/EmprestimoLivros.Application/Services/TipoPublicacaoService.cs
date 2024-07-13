@@ -1,13 +1,9 @@
 ﻿using AutoMapper;
 using EmprestimoLivros.Application.DTOs.TipoPublicacao.Request;
 using EmprestimoLivros.Application.Interfaces;
+using EmprestimoLivros.Application.Validator;
 using EmprestimoLivros.Domain.Entities;
 using EmprestimoLivros.Infra.Data.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EmprestimoLivros.Application.Services
 {
@@ -15,31 +11,35 @@ namespace EmprestimoLivros.Application.Services
     {
         private readonly IMapper _mapper;
         private readonly ITipoPublicacaoRepository _tipoPublicacaoRepository;
-        public TipoPublicacaoService(ITipoPublicacaoRepository tipoPublicacaoRepository, IMapper mapper)
+        private readonly TipoPublicacaoValidator _tipoPublicacaoValidator;
+
+        public TipoPublicacaoService(ITipoPublicacaoRepository tipoPublicacaoRepository, IMapper mapper, TipoPublicacaoValidator tipoPublicacaoValidator)
         {
             _mapper = mapper;
             _tipoPublicacaoRepository = tipoPublicacaoRepository;
+            _tipoPublicacaoValidator = tipoPublicacaoValidator;
         }
 
-        public Task<TipoPublicacao> BuscarTipoPublicacao(string tipoPublicacao)
+        public async Task<TipoPublicacao> BuscarTipoPublicacaoPorId(int id)
         {
-            return _tipoPublicacaoRepository.BuscarTipoPublicacao(tipoPublicacao);
+            await _tipoPublicacaoValidator.ValidaId(id);
+            return await _tipoPublicacaoRepository.BuscarTipoPublicacaoPorId(id);
         }
 
-        public Task CadastrarTipoPublicacao(CadastrarTipoPublicacaoRequestDTO tipoPublicacao)
+        public async Task CadastrarTipoPublicacao(CadastrarTipoPublicacaoRequestDTO tipoPublicacao)
         {
             var pub = _mapper.Map<TipoPublicacao>(tipoPublicacao);
-            return _tipoPublicacaoRepository.CadastrarTipoPublicacao(pub);
+            await _tipoPublicacaoRepository.CadastrarTipoPublicacao(pub);
         }
 
-        public Task<IEnumerable<TipoPublicacao>> ListarTipoPublicacao()
+        public async Task<IEnumerable<TipoPublicacao>> ListarTipoPublicacao()
         {
-            return _tipoPublicacaoRepository.ListarTipoPublicacao();
+            return await _tipoPublicacaoRepository.ListarTipoPublicacao();
         }
 
-        public Task RemoverTipoPublicacao(int id)
+        public async Task RemoverTipoPublicacao(int id)
         {
-            return _tipoPublicacaoRepository.RemoverTipoPublicacao(id);
+            await _tipoPublicacaoRepository.RemoverTipoPublicacao(id);
         }
     }
 }
