@@ -20,15 +20,16 @@ Requisitos
 1.	Requisitos Funcionais
 O sistema de empréstimo de livros terá um API que será responsável pelas regras de negócio. 
     
-    1. Lista de requisitos obrigatórios
-    2. Login do sistema
-    3. Cadastro de usuários
-    4. Cadastro de Editora
-    5. Cadastro de área de conhecimento
-    6. Cadastro de tipo de publicações
-    7. Cadastro de publicações 
-    8. Cadastro de empréstimos
-    9. Cadastro de reserva de livros
+2. Lista de requisitos obrigatórios
+    
+        1. Login do sistema
+        2. Cadastro de usuários
+        3. Cadastro de Editora
+        4. Cadastro de área de conhecimento
+        5. Cadastro de tipo de publicações
+        6. Cadastro de publicações 
+        7. Cadastro de empréstimos
+        8. Cadastro de reserva de livros
 
 ## Instalar MongoDB
 
