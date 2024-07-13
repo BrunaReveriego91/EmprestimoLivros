@@ -22,9 +22,9 @@ namespace EmprestimoLivros.Infra.Data.Repositories
         public string GenerateToken(Usuario usuario)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.UTF8.GetBytes("s3cR3tK3yW1thSp3c1@lCh@r@cter$123!");
-            var issuer = "FiapTechChallenge"; // Certifique-se de que este valor é o mesmo configurado no TokenValidationParameters
-            var audience = "yourAudience"; // Certifique-se de que este valor é o mesmo configurado no TokenValidationParameters
+            var key = Encoding.UTF8.GetBytes(_settings.Secret!);
+            var issuer = "FiapTechChallenge";
+            var audience = "audiance";
 
             var tokenDescriptor = new SecurityTokenDescriptor
             {

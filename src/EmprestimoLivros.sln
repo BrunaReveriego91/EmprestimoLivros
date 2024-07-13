@@ -3,17 +3,19 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34607.119
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmprestimoLivros.API", "EmprestimoLivros.API\EmprestimoLivros.API.csproj", "{A7615705-EA0B-4BC3-AC4D-63AA156F3633}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmprestimoLivros.API", "EmprestimoLivros.API\EmprestimoLivros.API.csproj", "{A7615705-EA0B-4BC3-AC4D-63AA156F3633}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmprestimoLivros.Domain", "EmprestimoLivros.Domain\EmprestimoLivros.Domain.csproj", "{102691BA-C789-4F23-9698-D6E72FF08F48}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmprestimoLivros.Domain", "EmprestimoLivros.Domain\EmprestimoLivros.Domain.csproj", "{102691BA-C789-4F23-9698-D6E72FF08F48}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmprestimoLivros.Infra.IoC", "EmprestimoLivros.Infra.IoC\EmprestimoLivros.Infra.IoC.csproj", "{4E9B9926-224E-4B00-A1E7-C084C6D6F54E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmprestimoLivros.Infra.IoC", "EmprestimoLivros.Infra.IoC\EmprestimoLivros.Infra.IoC.csproj", "{4E9B9926-224E-4B00-A1E7-C084C6D6F54E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmprestimoLivros.Application", "EmprestimoLivros.Application\EmprestimoLivros.Application.csproj", "{18AD0BB7-2070-4E3E-8D69-883CFDF90494}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmprestimoLivros.Application", "EmprestimoLivros.Application\EmprestimoLivros.Application.csproj", "{18AD0BB7-2070-4E3E-8D69-883CFDF90494}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmprestimoLivros.Infra.Data", "EmprestimoLivros.Infra.Data\EmprestimoLivros.Infra.Data.csproj", "{9127A2F0-2D41-4CD1-97D3-50A0A1C5487C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmprestimoLivros.Tests", "EmprestimoLivros.Tests\EmprestimoLivros.Tests.csproj", "{4B8B19B2-8075-4C76-A994-5692733A1ED1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmprestimoLivros.Tests", "EmprestimoLivros.Tests\EmprestimoLivros.Tests.csproj", "{4B8B19B2-8075-4C76-A994-5692733A1ED1}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmprestimosLivroFront", "EmprestimosLivroFront\EmprestimosLivroFront.csproj", "{D9F5C3D2-EAB1-493B-B93E-5EB3EC41BDDE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{4B8B19B2-8075-4C76-A994-5692733A1ED1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4B8B19B2-8075-4C76-A994-5692733A1ED1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4B8B19B2-8075-4C76-A994-5692733A1ED1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D9F5C3D2-EAB1-493B-B93E-5EB3EC41BDDE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D9F5C3D2-EAB1-493B-B93E-5EB3EC41BDDE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D9F5C3D2-EAB1-493B-B93E-5EB3EC41BDDE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D9F5C3D2-EAB1-493B-B93E-5EB3EC41BDDE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
