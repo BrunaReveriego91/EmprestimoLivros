@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using EmprestimoLivros.Application.DTOs.Editora.Request;
+using EmprestimoLivros.Application.Interfaces;
 using EmprestimoLivros.Application.Services;
 using EmprestimoLivros.Application.Validator;
 using EmprestimoLivros.Domain.Entities;
@@ -121,6 +122,18 @@ namespace EmprestimoLivros.Tests
             // Assert
             _mockEditoraRepository.Verify(repo => repo.RemoverEditora(id), Times.Once);
         }
+        [Fact]
+        public async Task BuscarEditora_DeveRetornarNullQuandoIdInvalido()
+        {
+            // Arrange
+            int id = -1; // Negative ID
+
+            // Act
+            Func<Task> act = async () => await _editoraService.BuscarEditora(id);
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentException>(act);
+        }
 
         [Fact]
         public async Task RemoverEditora_DeveLancarExcecaoQuandoEditoraNaoExistir()
@@ -160,5 +173,6 @@ namespace EmprestimoLivros.Tests
                 Assert.Contains(result, e => e.Id == editora.Id && e.Nome == editora.Nome);
             }
         }
+       
     }
 }

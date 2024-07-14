@@ -143,5 +143,17 @@ namespace EmprestimoLivros.Tests
                 Assert.Contains(result, a => a.Id == area.Id && a.NomeArea == area.NomeArea);
             }
         }
+        [Fact]
+        public async Task BuscarAreaConhecimento_DeveRetornarNullQuandoIdInvalido()
+        {
+            // Arrange
+            int id = -1; // Negative ID
+
+            // Act
+            Func<Task> act = async () => await _areaConhecimentoService.BuscarAreaConhecimento(id);
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentException>(act);
+        }
     }
 }

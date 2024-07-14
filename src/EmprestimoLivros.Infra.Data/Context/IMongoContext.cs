@@ -6,9 +6,7 @@ namespace EmprestimoLivros.Infra.Data.Context
     public interface IMongoContext
     {
         IMongoCollection<Editora> Editoras { get; }
-
         IMongoCollection<Titulo> Titulos { get; }
-
         IMongoCollection<Usuario> Usuarios { get; }
         IMongoCollection<TipoPublicacao> TipoPublicacao { get; }
         IMongoCollection<Publicacao> Publicacao { get; }

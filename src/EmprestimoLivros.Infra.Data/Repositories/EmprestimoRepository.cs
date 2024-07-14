@@ -80,5 +80,9 @@ namespace EmprestimoLivros.Infra.Data.Repositories
                 throw new Exception(ex.Message);
             }
         }
+        public Task DeletarEmprestimo(int Id)
+        {
+            return _context.Emprestimos.FindOneAndDeleteAsync(e => e.Id == Id);
+        }
     }
 }

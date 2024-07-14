@@ -46,6 +46,18 @@ namespace EmprestimoLivros.Tests
             Assert.Equal(emprestimos.Count, result.Count());
         }
         [Fact]
+        public async Task BuscarEmprestimosPorIdPublicacao_DeveRetornarNullQuandoIdInvalido()
+        {
+            // Arrange
+            int id = -1; // Negative ID
+
+            // Act
+            Func<Task> act = async () => await _emprestimoService.BuscarEmprestimosPorIdPublicacao(id);
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentException>(act);
+        }
+        [Fact]
         public async Task CadastrarEmprestimo_DeveCadastrarNovoEmprestimo()
         {
             // Arrange

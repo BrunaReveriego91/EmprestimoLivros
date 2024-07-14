@@ -41,6 +41,18 @@ namespace EmprestimoLivros.Tests
             Assert.Equal(tipoPublicacao, result);
         }
         [Fact]
+        public async Task BuscarTipoPublicacaoPorId_DeveRetornarNullQuandoIdInvalido()
+        {
+            // Arrange
+            int id = -1; // Negative ID
+
+            // Act
+            Func<Task> act = async () => await _tipoPublicacaoService.BuscarTipoPublicacaoPorId(id);
+
+            // Assert
+            await Assert.ThrowsAsync<ArgumentException>(act);
+        }
+        [Fact]
         public async Task BuscarTipoPublicacaoPorId_DeveLancarExcecao_QuandoIdInvalido()
         {
             // Arrange

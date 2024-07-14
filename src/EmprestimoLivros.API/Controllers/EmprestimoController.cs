@@ -75,5 +75,23 @@ namespace EmprestimoLivros.API.Controllers
                 return BadRequest(ex.Message);
             }
         }
+        [HttpDelete]
+        [Authorize(Roles = "Funcionario")]
+        public async Task<IActionResult> DeletarEmprestimo(int idEmprestimo)
+        {
+            try
+            {
+                await _emprestimoService.DeletarEmprestimo(idEmprestimo);
+                return Ok("Emprestimo deletado com sucesso!");
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using EmprestimoLivros.Application.DTOs.Usuario.Request;
+using EmprestimoLivros.Application.Interfaces;
 using EmprestimoLivros.Application.Mappings.AutoMapperConfig;
 using EmprestimoLivros.Application.Services;
 using EmprestimoLivros.Application.Validator;
@@ -49,7 +50,18 @@ namespace EmprestimoLivros.Tests
             Assert.NotNull(result);
             Assert.Equal(usuario.Nome, result.Nome);
         }
+        [Fact]
+        public async Task BuscarUsuario_DeveRetornarNullQuandoIdInvalido()
+        {
+            // Arrange
+            int id = -1;
 
+            // Act
+            Func<Task> act = async () => await _usuarioService.BuscarUsuario(id);
+
+            // Assert
+            await Assert.ThrowsAsync<Exception>(act);
+        }
         [Fact]
         public async Task BuscarUsuario_DeveLancarExcecao_QuandoIdInvalido()
         {

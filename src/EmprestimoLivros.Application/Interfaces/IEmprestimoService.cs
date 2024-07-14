@@ -9,5 +9,6 @@ namespace EmprestimoLivros.Application.Interfaces
         Task AtualizarDevolucaoEmprestimo(int idEmprestimo);
         Task CadastrarEmprestimo(CadastrarEmprestimoRequestDTO emprestimo);
         Task<IEnumerable<Emprestimo>> ListarEmprestimos();
+        Task DeletarEmprestimo(int idEmprestimo);
     }
 }

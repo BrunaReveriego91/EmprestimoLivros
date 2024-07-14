@@ -4,6 +4,7 @@ using EmprestimoLivros.Application.Interfaces;
 using EmprestimoLivros.Application.Validator;
 using EmprestimoLivros.Domain.Entities;
 using EmprestimoLivros.Infra.Data.Interfaces;
+using EmprestimoLivros.Infra.Data.Repositories;
 
 namespace EmprestimoLivros.Application.Services
 {
@@ -84,6 +85,11 @@ namespace EmprestimoLivros.Application.Services
 
             return emprestimos;
 
+        }
+
+        public async Task DeletarEmprestimo(int Id)
+        {
+            await _emprestimoRepository.DeletarEmprestimo(Id);
         }
     }
 }
