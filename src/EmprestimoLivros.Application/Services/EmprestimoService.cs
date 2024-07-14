@@ -76,7 +76,14 @@ namespace EmprestimoLivros.Application.Services
 
         public async Task<IEnumerable<Emprestimo>> ListarEmprestimos()
         {
-            return await _emprestimoRepository.ListarEmprestimos();
+            var emprestimos = await _emprestimoRepository.ListarEmprestimos();
+
+            /*Requisito: Listar empréstimos */
+            if (emprestimos == null || !emprestimos.Any())
+                throw new Exception("Não foram encontrados empréstimos.");
+
+            return emprestimos;
+
         }
     }
 }

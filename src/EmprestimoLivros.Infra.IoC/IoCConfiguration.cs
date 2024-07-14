@@ -21,6 +21,7 @@ namespace EmprestimoLivros.Infra.IoC
             services.AddScoped<IPublicacaoRepository, PublicacaoRepository>();
             services.AddScoped<IAreaConhecimentoRepository, AreaConhecimentoRepository>();
             services.AddScoped<IAutenticarRepository, AutenticarRepository>();
+            services.AddScoped<IEmprestimoRepository, EmprestimoRepository>();
         }
 
         public static void ConfigureService(IServiceCollection services)
@@ -30,6 +31,7 @@ namespace EmprestimoLivros.Infra.IoC
             services.AddScoped<UsuarioValidator>();
             services.AddScoped<TipoPublicacaoValidator>();
             services.AddScoped<AreaConhecimentoValidator>();
+            services.AddScoped<EmprestimoValidator>();
             services.AddScoped<PublicacaoValidator>();
             services.AddScoped<IEditoraService, EditoraService>();
             services.AddScoped<IUsuarioService, UsuarioService>();
@@ -37,6 +39,7 @@ namespace EmprestimoLivros.Infra.IoC
             services.AddScoped<IPublicacaoService, PublicacaoService>();
             services.AddScoped<IAreaConhecimentoService, AreaConhecimentoService>();
             services.AddScoped<IAutenticarService, AutenticarService>();
+            services.AddScoped<IEmprestimoService, EmprestimoService>();
             services.AddScoped<IJwtToken, JwtToken>();
         }
 

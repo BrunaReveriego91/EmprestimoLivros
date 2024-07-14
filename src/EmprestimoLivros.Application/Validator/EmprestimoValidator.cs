@@ -41,7 +41,7 @@ namespace EmprestimoLivros.Application.Validator
                     stringValidacao.Append(',');
                 }
 
-                throw new ArgumentException(stringValidacao.ToString().Remove(stringValidacao.Length - 1);
+                throw new ArgumentException(stringValidacao.ToString().Remove(stringValidacao.Length - 1));
             }
 
 
