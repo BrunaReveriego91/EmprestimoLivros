@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using EmprestimoLivros.Application.DTOs.Usuario.Request;
+using EmprestimoLivros.Application.Mappings.AutoMapperConfig;
 using EmprestimoLivros.Application.Services;
 using EmprestimoLivros.Application.Validator;
 using EmprestimoLivros.Domain.Entities;
@@ -11,15 +12,22 @@ namespace EmprestimoLivros.Tests
     public class UsuarioServiceTests
     {
         private readonly UsuarioService _usuarioService;
-        private readonly Mock<IUsuarioRepository> _mockTipoPublicacaoRepository = new Mock<IUsuarioRepository>();
-        private readonly Mock<IMapper> _mockMapper = new Mock<IMapper>();
+        private readonly Mock<IUsuarioRepository> _mockusuarioRepository = new Mock<IUsuarioRepository>();
+        private readonly IMapper _mapper;
         private readonly UsuarioValidator _validator = new UsuarioValidator();
-       
+
         public UsuarioServiceTests()
         {
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.AddProfile<AutoMapperConfig>();
+            });
+
+            _mapper = config.CreateMapper();
+
             _usuarioService = new UsuarioService(
-                _mockMapper.Object,
-                _mockTipoPublicacaoRepository.Object
+                _mapper,
+                _mockusuarioRepository.Object
             );
         }
 
@@ -29,15 +37,17 @@ namespace EmprestimoLivros.Tests
             // Arrange
             int validId = 1;
             var usuario = new Usuario();
-            _mockTipoPublicacaoRepository.Setup(repo => repo.BuscarUsuario(validId))
+
+            _mockusuarioRepository.Setup(repo => repo.BuscarUsuario(validId))
                 .ReturnsAsync(usuario);
+
 
             // Act
             var result = await _usuarioService.BuscarUsuario(validId);
 
             // Assert
             Assert.NotNull(result);
-            Assert.Equal(usuario, result);
+            Assert.Equal(usuario.Nome, result.Nome);
         }
 
         [Fact]
@@ -55,7 +65,7 @@ namespace EmprestimoLivros.Tests
         {
             // Arrange
             int userId = 1;
-            _mockTipoPublicacaoRepository.Setup(repo => repo.BuscarUsuario(userId))
+            _mockusuarioRepository.Setup(repo => repo.BuscarUsuario(userId))
                 .ReturnsAsync((Usuario)null);
 
             // Act & Assert
@@ -68,7 +78,7 @@ namespace EmprestimoLivros.Tests
             // Arrange
             string validMatricula = "matricula123";
             var usuario = new Usuario();
-            _mockTipoPublicacaoRepository.Setup(repo => repo.BuscarUsuarioPorMatricula(validMatricula))
+            _mockusuarioRepository.Setup(repo => repo.BuscarUsuarioPorMatricula(validMatricula))
                 .ReturnsAsync(usuario);
 
             // Act
@@ -98,18 +108,18 @@ namespace EmprestimoLivros.Tests
             // Arrange
             var usuarioDto = new CadastrarUsuarioRequestDTO();
             var usuario = new Usuario();
-            _mockMapper.Setup(mapper => mapper.Map<Usuario>(usuarioDto))
-                .Returns(usuario);
-            _mockTipoPublicacaoRepository.Setup(repo => repo.BuscarUsuarioPorMatricula(usuarioDto.Matricula))
+
+            _mockusuarioRepository.Setup(repo => repo.BuscarUsuarioPorMatricula(usuarioDto.Matricula))
                 .ReturnsAsync((Usuario)null);
-            _mockTipoPublicacaoRepository.Setup(repo => repo.CadastrarUsuario(usuario))
-                .Returns(Task.CompletedTask);
+
+            _mockusuarioRepository.Setup(repo => repo.CadastrarUsuario(usuario))
+            .Returns(Task.CompletedTask);
 
             // Act
             await _usuarioService.CadastrarUsuario(usuarioDto);
 
             // Assert
-            _mockTipoPublicacaoRepository.Verify(repo => repo.CadastrarUsuario(usuario), Times.Once);
+            _mockusuarioRepository.Verify(repo => repo.CadastrarUsuario(It.IsAny<Usuario>()), Times.Once);
         }
 
         [Fact]
@@ -128,7 +138,7 @@ namespace EmprestimoLivros.Tests
             // Arrange
             var usuarioDto = new CadastrarUsuarioRequestDTO() { Matricula = "matricula123" };
             var existingUser = new Usuario();
-            _mockTipoPublicacaoRepository.Setup(repo => repo.BuscarUsuarioPorMatricula(usuarioDto.Matricula))
+            _mockusuarioRepository.Setup(repo => repo.BuscarUsuarioPorMatricula(usuarioDto.Matricula))
                 .ReturnsAsync(existingUser);
 
             // Act & Assert
@@ -140,7 +150,7 @@ namespace EmprestimoLivros.Tests
         {
             // Arrange
             var usuarios = new List<Usuario>() { new Usuario(), new Usuario() };
-            _mockTipoPublicacaoRepository.Setup(repo => repo.ListarUsuarios())
+            _mockusuarioRepository.Setup(repo => repo.ListarUsuarios())
                 .ReturnsAsync(usuarios);
 
             // Act

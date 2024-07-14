@@ -47,6 +47,7 @@ namespace EmprestimoLivros.API.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Funcionario")]
         public async Task<IActionResult> CadastrarAreaConhecimento(CadastrarAreaConhecimentoRequestDTO acDTO)
         {
             try
@@ -61,6 +62,7 @@ namespace EmprestimoLivros.API.Controllers
         }
 
         [HttpDelete]
+        [Authorize(Roles = "Funcionario")]
         [Route("{id}")]
         public async Task<IActionResult> RemoverAreaConhecimento(int Id)
         {

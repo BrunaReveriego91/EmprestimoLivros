@@ -45,6 +45,7 @@ namespace EmprestimoLivros.API.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Funcionario")]
         public async Task<IActionResult> CadastrarPublicacao([FromBody] CadastrarPublicacaoRequestDTO publicacaoRequestDTO)
         {
             try
@@ -60,6 +61,7 @@ namespace EmprestimoLivros.API.Controllers
         }
 
         [HttpDelete]
+        [Authorize(Roles = "Funcionario")]
         [Route("{id}")]
         public async Task<IActionResult> RemoverPublicacao(int Id)
         {

@@ -14,7 +14,7 @@ namespace EmprestimoLivros.Tests
         private readonly AreaConhecimentoService _areaConhecimentoService;
         private readonly Mock<IAreaConhecimentoRepository> _mockAreaConhecimentoRepository = new Mock<IAreaConhecimentoRepository>();
         private readonly Mock<IMapper> _mockMapper = new Mock<IMapper>();
-        private readonly AreaConhecimentoValidator _validator = new AreaConhecimentoValidator(); 
+        private readonly AreaConhecimentoValidator _validator = new AreaConhecimentoValidator();
 
         public AreaConhecimentoServiceTests()
         {
@@ -41,17 +41,19 @@ namespace EmprestimoLivros.Tests
         }
 
         [Fact]
-        public async Task BuscarAreaConhecimento_DeveRetornarNullQuandoNaoExistir()
+        public async Task BuscarAreaConhecimento_DeveRetornarSystemExceptionQuandoNaoExistir()
         {
             // Arrange
             int id = 1;
             _mockAreaConhecimentoRepository.Setup(repo => repo.BuscarAreaConhecimento(id)).ReturnsAsync((AreaConhecimento)null);
 
             // Act
-            var result = await _areaConhecimentoService.BuscarAreaConhecimento(id);
 
             // Assert
-            Assert.Null(result);
+            Assert.ThrowsAsync<Exception>(async () =>
+            {
+                await _areaConhecimentoService.BuscarAreaConhecimento(id);
+            });
         }
 
         [Fact]

@@ -4,7 +4,6 @@ using EmprestimoLivros.Application.Interfaces;
 using EmprestimoLivros.Application.Validator;
 using EmprestimoLivros.Domain.Entities;
 using EmprestimoLivros.Infra.Data.Interfaces;
-using EmprestimoLivros.Infra.Data.Repositories;
 
 namespace EmprestimoLivros.Application.Services
 {
@@ -23,7 +22,12 @@ namespace EmprestimoLivros.Application.Services
         public async Task<AreaConhecimento> BuscarAreaConhecimento(int Id)
         {
             await _acValidator.ValidaId(Id);
-            return await _areaConhecimentoRepository.BuscarAreaConhecimento(Id);
+            var areaDeConhecimento = await _areaConhecimentoRepository.BuscarAreaConhecimento(Id);
+
+            if (areaDeConhecimento == null)
+                throw new Exception("Área de conhecimento não cadastrada.");
+
+            return areaDeConhecimento;
         }
 
         public async Task CadastrarAreaConheicmento(CadastrarAreaConhecimentoRequestDTO areaConhecimentoDTO)
@@ -40,7 +44,12 @@ namespace EmprestimoLivros.Application.Services
 
         public async Task<IEnumerable<AreaConhecimento>> ListarTodasAreas()
         {
-            return await _areaConhecimentoRepository.ListarTodasAreas();
+            var areasDeConhecimento = await _areaConhecimentoRepository.ListarTodasAreas();
+
+            if (areasDeConhecimento == null || !areasDeConhecimento.Any())
+                throw new Exception("Não foram encontradas áreas de conhecimento.");
+
+            return areasDeConhecimento;
         }
 
         public async Task RemoverAreaConhecimento(int Id)

@@ -47,6 +47,7 @@ namespace EmprestimoLivros.API.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Funcionario")]
         public async Task<IActionResult> CadastrarEditora([FromBody] CadastrarEditoraRequestDTO editoraDTO)
         {
             try
@@ -62,6 +63,7 @@ namespace EmprestimoLivros.API.Controllers
         }
 
         [HttpDelete]
+        [Authorize(Roles = "Funcionario")]
         [Route("{id}")]
         public async Task<IActionResult> RemoverEditora(int Id)
         {

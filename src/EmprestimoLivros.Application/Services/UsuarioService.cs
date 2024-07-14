@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using EmprestimoLivros.Application.DTOs.Usuario.Request;
+using EmprestimoLivros.Application.DTOs.Usuario.Response;
 using EmprestimoLivros.Application.Interfaces;
 using EmprestimoLivros.Domain.Entities;
 using EmprestimoLivros.Infra.Data.Interfaces;
@@ -16,13 +17,21 @@ namespace EmprestimoLivros.Application.Services
             _usuarioRepository = usuarioRepository;
         }
 
-        public async Task<Usuario> BuscarUsuario(int id)
+        public async Task<BuscarUsuarioResponseDto> BuscarUsuario(int id)
         {
             var usuario = await _usuarioRepository.BuscarUsuario(id);
+
             if (usuario == null)
                 throw new Exception("Usuário não está cadastrado no sistema");
 
-            return usuario;
+            var usuarioMapper = new BuscarUsuarioResponseDto();
+
+            await Task.Run(() =>
+            {
+                usuarioMapper = _mapper.Map<BuscarUsuarioResponseDto>(usuario);
+            });
+
+            return usuarioMapper;
         }
 
         public async Task<Usuario> BuscarUsuarioPorMatricula(string matricula)
@@ -43,9 +52,17 @@ namespace EmprestimoLivros.Application.Services
             await _usuarioRepository.CadastrarUsuario(usuario);
         }
 
-        public async Task<IEnumerable<Usuario>> ListarUsuarios()
+        public async Task<IEnumerable<BuscarUsuarioResponseDto>> ListarUsuarios()
         {
-            return await _usuarioRepository.ListarUsuarios();
+            var usuarios = await _usuarioRepository.ListarUsuarios();
+            var usuariosMapper = new List<BuscarUsuarioResponseDto>();
+
+            await Task.Run(() =>
+            {
+                usuariosMapper = _mapper.Map<List<BuscarUsuarioResponseDto>>(usuarios);
+            });
+
+            return usuariosMapper;
         }
 
         public async Task DeletarUsuario(int Id)

@@ -75,6 +75,7 @@ namespace EmprestimoLivros.Tests
             _mockEmprestimoRepository.Setup(repo => repo.AtualizarDevolucaoEmprestimo(idEmprestimo))
                 .Returns(Task.CompletedTask);
 
+            _mockEmprestimoRepository.Setup(x => x.BuscarEmprestimoPorIdEmprestimo(idEmprestimo)).ReturnsAsync(new Emprestimo());
             // Act
             await _emprestimoService.AtualizarDevolucaoEmprestimo(idEmprestimo);
 

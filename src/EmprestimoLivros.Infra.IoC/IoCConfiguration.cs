@@ -45,7 +45,6 @@ namespace EmprestimoLivros.Infra.IoC
 
         public static void ConfigureAutoMapper(IServiceCollection services)
         {
-            services.AddSingleton<IMapper>(AutoMapperConfig.Initialize());
             services.AddAutoMapper(typeof(AutoMapperConfig));
         }
     }

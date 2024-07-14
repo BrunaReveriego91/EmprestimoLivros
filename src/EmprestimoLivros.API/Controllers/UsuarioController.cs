@@ -1,6 +1,5 @@
 ﻿using EmprestimoLivros.Application.DTOs.Usuario.Request;
 using EmprestimoLivros.Application.Interfaces;
-using EmprestimoLivros.Application.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -59,6 +58,7 @@ namespace EmprestimoLivros.API.Controllers
 
         }
         [HttpDelete("{Id}")]
+        [Authorize(Roles = "Funcionario")]
         public async Task<IActionResult> DeletarUsuario(int Id)
         {
             try

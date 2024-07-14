@@ -1,6 +1,5 @@
 ﻿using EmprestimoLivros.Application.DTOs.TipoPublicacao.Request;
 using EmprestimoLivros.Application.Interfaces;
-using EmprestimoLivros.Application.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -44,6 +43,7 @@ namespace EmprestimoLivros.API.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Funcionario")]
         public async Task<IActionResult> CadastrarTipoPublicacao([FromBody] CadastrarTipoPublicacaoRequestDTO tipoPublicacaoDTO)
         {
             try
@@ -59,6 +59,7 @@ namespace EmprestimoLivros.API.Controllers
         }
 
         [HttpDelete]
+        [Authorize(Roles = "Funcionario")]
         [Route("{id}")]
         public async Task<IActionResult> RemoverTipoPublicacao(int Id)
         {
