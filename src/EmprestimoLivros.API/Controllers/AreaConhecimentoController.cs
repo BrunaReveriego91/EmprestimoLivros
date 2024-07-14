@@ -12,23 +12,24 @@ namespace EmprestimoLivros.API.Controllers
     public class AreaConhecimentoController : ControllerBase
     {
         private readonly IAreaConhecimentoService _areaConhecimentoService;
-        public AreaConhecimentoController(IAreaConhecimentoService areaConhecimentoService) 
-        { 
+        public AreaConhecimentoController(IAreaConhecimentoService areaConhecimentoService)
+        {
             _areaConhecimentoService = areaConhecimentoService;
         }
 
         [HttpGet]
-        public async Task<IActionResult> ListarAreasConhecimento() 
+        public async Task<IActionResult> ListarAreasConhecimento()
         {
             try
             {
                 var areas = await _areaConhecimentoService.ListarTodasAreas();
                 return Ok(areas);
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
-            
+
         }
 
         [HttpGet]
@@ -39,11 +40,12 @@ namespace EmprestimoLivros.API.Controllers
             {
                 var areaConhecimento = await _areaConhecimentoService.BuscarAreaConhecimento(Id);
                 return Ok(areaConhecimento);
-            } catch (Exception ex) 
+            }
+            catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
-            
+
         }
 
         [HttpPost]
@@ -54,11 +56,12 @@ namespace EmprestimoLivros.API.Controllers
             {
                 await _areaConhecimentoService.CadastrarAreaConheicmento(acDTO);
                 return Ok();
-            } catch (Exception ex) 
+            }
+            catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
-            
+
         }
 
         [HttpDelete]
@@ -70,11 +73,12 @@ namespace EmprestimoLivros.API.Controllers
             {
                 await _areaConhecimentoService.RemoverAreaConhecimento(Id);
                 return Ok();
-            } catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
         }
-        
+
     }
 }

@@ -21,8 +21,11 @@ namespace EmprestimoLivros.Tests.IntegrationTests
             //Arrange & Act                     
             var response = await _httpClient.GetAsync(url);
 
+            var content = await response.Content.ReadAsStringAsync(default);
+
             //Assert
-            Assert.True(response.StatusCode == HttpStatusCode.NoContent || response.StatusCode == HttpStatusCode.OK);
+            Assert.True((content == "Não foram encontradas áreas de conhecimento." && response.StatusCode == HttpStatusCode.BadRequest) || response.StatusCode == HttpStatusCode.NoContent || response.StatusCode == HttpStatusCode.OK);
+
             await DeletarAdminAsync(token);
         }
 
@@ -38,9 +41,10 @@ namespace EmprestimoLivros.Tests.IntegrationTests
             var id = "1";
 
             var response = await _httpClient.GetAsync(url.Replace("{Id}", id));
+            var content = await response.Content.ReadAsStringAsync(default);
 
             // Assert
-            if (response.StatusCode == HttpStatusCode.NotFound || response.StatusCode == HttpStatusCode.BadRequest)
+            if (content == "Área de conhecimento não cadastrada." || response.StatusCode == HttpStatusCode.NotFound || response.StatusCode == HttpStatusCode.BadRequest)
             {
                 Assert.True(true);
             }

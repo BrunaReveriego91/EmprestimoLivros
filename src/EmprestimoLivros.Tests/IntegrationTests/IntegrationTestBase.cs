@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc.Testing;
 using System.IdentityModel.Tokens.Jwt;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
-using System.Security.Claims;
 
 namespace EmprestimoLivros.Tests.IntegrationTests
 {
@@ -47,13 +46,14 @@ namespace EmprestimoLivros.Tests.IntegrationTests
         {
             var usuarioDTO = new CadastrarUsuarioRequestDTO
             {
+                Id = 999,
                 Nome = "Admin",
                 Matricula = "000001",
                 DataNascimento = new DateTime(1990, 1, 1),
-                TipoUsuario = "Admin",
+                TipoUsuario = "Funcionario",
                 Login = login,
                 Password = password,
-                Role = "Admin"
+                Role = "Funcionario"
             };
 
             await CriarUsuarioAsync(usuarioDTO);
@@ -97,13 +97,12 @@ namespace EmprestimoLivros.Tests.IntegrationTests
         }
         protected async Task DeletarAdminAsync(string token = null)
         {
-            // Obter o ID do usuário logado a partir do token
             var idLoggedUser = GetUserIdFromToken(token);
             if (idLoggedUser == null)
             {
                 throw new Exception("ID do usuário não encontrado no token");
             }
-            // Tenta excluir o usuário logado (admin)
+      
             if (int.TryParse(idLoggedUser, out var id))
             {
                 await DeletarUsuarioAsync(id, token);

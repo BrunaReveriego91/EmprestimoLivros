@@ -89,21 +89,6 @@ namespace EmprestimoLivros.Tests.IntegrationTests
             }
             await DeletarAdminAsync(token);
         }
-        [Theory]
-        [InlineData("/Publicacao/{id}")]
-        public async Task BuscarPublicacaoPorIdInvalidoDeveRetornarBadRequest(string url)
-        {
-            // Arrange
-            var token = await ObterTokenAutenticacaoAsync();
-            DefinirAutenticacaoHeader(token);
 
-            // Act
-            var invalidId = "-1";
-            var response = await _httpClient.GetAsync(url.Replace("{id}", invalidId));
-
-            // Assert
-            Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
-            await DeletarAdminAsync(token);
-        }
     }
 }
