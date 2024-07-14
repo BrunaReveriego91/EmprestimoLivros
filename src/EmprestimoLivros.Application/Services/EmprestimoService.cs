@@ -26,6 +26,12 @@ namespace EmprestimoLivros.Application.Services
 
         public async Task AtualizarDevolucaoEmprestimo(int idEmprestimo)
         {
+            var emprestimo = await _emprestimoRepository.BuscarEmprestimoPorIdEmprestimo(idEmprestimo);
+
+            /*Requisito: Não permitir alterar quando emprestimo não for localizado .*/
+            if (emprestimo == null)
+                throw new Exception("Não foi possível atualizar o empréstimo, empréstimo não localizado .");
+
             await _emprestimoRepository.AtualizarDevolucaoEmprestimo(idEmprestimo);
         }
 

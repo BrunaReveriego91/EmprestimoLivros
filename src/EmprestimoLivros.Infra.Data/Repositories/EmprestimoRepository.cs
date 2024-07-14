@@ -21,6 +21,23 @@ namespace EmprestimoLivros.Infra.Data.Repositories
             await _context.Emprestimos.UpdateOneAsync(filter, update);
         }
 
+        public async Task<Emprestimo> BuscarEmprestimoPorIdEmprestimo(int idEmprestimo)
+        {
+
+            try
+            {
+                var filter = Builders<Emprestimo>.Filter.Eq(e => e.Id, idEmprestimo);
+                var emprestimo = await _context.Emprestimos.Find(filter)
+               .FirstOrDefaultAsync();
+
+                return emprestimo;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         public async Task<IEnumerable<Emprestimo>> BuscarEmprestimosPorIdPublicacao(int idPublicacao)
         {
             try
