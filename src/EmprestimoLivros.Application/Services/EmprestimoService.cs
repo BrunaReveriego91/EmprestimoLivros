@@ -38,9 +38,12 @@ namespace EmprestimoLivros.Application.Services
 
         public async Task<IEnumerable<Emprestimo>> BuscarEmprestimosPorIdPublicacao(int idPublicacao)
         {
+            if (idPublicacao <= 0)
+            {
+                throw new ArgumentException("Invalid publication ID. ID must be positive.");
+            }
+
             return await _emprestimoRepository.BuscarEmprestimosPorIdPublicacao(idPublicacao);
-
-
         }
 
         public async Task CadastrarEmprestimo(CadastrarEmprestimoRequestDTO emprestimo)

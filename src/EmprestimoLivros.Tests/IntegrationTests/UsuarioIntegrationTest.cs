@@ -79,13 +79,13 @@ namespace EmprestimoLivros.Tests.IntegrationTests
             var usuarioDTO = new CadastrarUsuarioRequestDTO
             {
                 Id = 999999,
-                Nome = "User",
-                Matricula = "000002",
+                Nome = "User Teste",
+                Matricula = "999999",
                 DataNascimento = new DateTime(1990, 1, 1),
-                TipoUsuario = "User",
-                Login = "user",
-                Password = "user",
-                Role = "User"
+                TipoUsuario = "Funcionario",
+                Login = "userTeste",
+                Password = "userTeste",
+                Role = "Funcionario"
             };
 
             var token = await ObterTokenAutenticacaoAsync();
