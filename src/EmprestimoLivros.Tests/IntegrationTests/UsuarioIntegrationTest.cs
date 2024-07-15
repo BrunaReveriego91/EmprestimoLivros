@@ -22,11 +22,10 @@ namespace EmprestimoLivros.Tests.IntegrationTests
 
             // Act
             var response = await _httpClient.GetAsync(url);
-            var content = await response.Content.ReadAsStringAsync();
 
             // Assert
-            Assert.True(response.StatusCode == HttpStatusCode.NoContent || response.StatusCode == HttpStatusCode.OK);
             await DeletarAdminAsync(token);
+            Assert.True(response.StatusCode == HttpStatusCode.NoContent || response.StatusCode == HttpStatusCode.OK);
         }
 
         [Theory]
@@ -43,6 +42,7 @@ namespace EmprestimoLivros.Tests.IntegrationTests
             var response = await _httpClient.GetAsync(url.Replace("{id}", id));
 
             // Assert
+            await DeletarAdminAsync(token);
             if (response.StatusCode == HttpStatusCode.NotFound || response.StatusCode == HttpStatusCode.BadRequest)
             {
                 Assert.True(true);
@@ -51,8 +51,6 @@ namespace EmprestimoLivros.Tests.IntegrationTests
             {
                 Assert.True(response.StatusCode == HttpStatusCode.NoContent || response.StatusCode == HttpStatusCode.OK);
             }
-            // Delete admin
-            await DeletarAdminAsync(token);
         }
 
         [Theory]
@@ -67,8 +65,8 @@ namespace EmprestimoLivros.Tests.IntegrationTests
             var response = await _httpClient.GetAsync(url.Replace("{id}", id));
 
             // Assert
-            Assert.True(response.StatusCode == HttpStatusCode.BadRequest || response.StatusCode == HttpStatusCode.InternalServerError);
             await DeletarAdminAsync(token);
+            Assert.True(response.StatusCode == HttpStatusCode.BadRequest || response.StatusCode == HttpStatusCode.InternalServerError);
         }
 
         [Theory]

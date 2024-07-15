@@ -22,8 +22,8 @@ namespace EmprestimoLivros.Tests.IntegrationTests
             var response = await _httpClient.GetAsync(url);
 
             //Assert
-            Assert.True(response.StatusCode == HttpStatusCode.NoContent || response.StatusCode == HttpStatusCode.OK);
             await DeletarAdminAsync(token);
+            Assert.True(response.StatusCode == HttpStatusCode.NoContent || response.StatusCode == HttpStatusCode.OK);
         }
 
         [Theory]
@@ -41,6 +41,7 @@ namespace EmprestimoLivros.Tests.IntegrationTests
 
             var content = response.Content.ReadAsStringAsync();
             // Assert
+            await DeletarAdminAsync(token);
             if (content == null || response.StatusCode == HttpStatusCode.NotFound || response.StatusCode == HttpStatusCode.BadRequest)
             {
                 Assert.True(true);
@@ -49,9 +50,6 @@ namespace EmprestimoLivros.Tests.IntegrationTests
             {
                 Assert.True(response.StatusCode == HttpStatusCode.NoContent || response.StatusCode == HttpStatusCode.OK);
             }
-            await DeletarAdminAsync(token);
         }
-
-
     }
 }

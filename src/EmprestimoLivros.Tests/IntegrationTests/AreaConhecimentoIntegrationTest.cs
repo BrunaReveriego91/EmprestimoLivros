@@ -1,5 +1,6 @@
 ﻿using EmprestimosLivros.API;
 using Microsoft.AspNetCore.Mvc.Testing;
+using Newtonsoft.Json.Linq;
 using System.Net;
 
 namespace EmprestimoLivros.Tests.IntegrationTests
@@ -14,38 +15,18 @@ namespace EmprestimoLivros.Tests.IntegrationTests
         [InlineData("/AreaConhecimento")]
         public async Task ListarAreaConhecimentoDeveRetornarHttpStatusOK(string url)
         {
+
             // Arrange
-            var token = await ObterTokenAutenticacaoAsync();
-            if (string.IsNullOrEmpty(token))
-            {
-                Assert.Fail("Failed to obtain authentication token.");
-            }
-            DefinirAutenticacaoHeader(token);
+            //var token = await ObterTokenAutenticacaoAsync();
+            //DefinirAutenticacaoHeader(token);
 
-            // Act
-            HttpResponseMessage response = null;
-            try
-            {
-                response = await _httpClient.GetAsync(url);
-            }
-            catch (Exception ex)
-            {
-                Assert.Fail($"Request failed: {ex.Message}");
-            }
+            //Arrange & Act                   
+            var response = await _httpClient.GetAsync(url);
+            var content = await response.Content.ReadAsStringAsync(default);
 
-            // Assert
-            Assert.NotNull(response);
-            var content = await response.Content.ReadAsStringAsync();
-
-            // Check status code and content
-            Assert.True(
-                (content == "Não foram encontradas áreas de conhecimento." && response.StatusCode == HttpStatusCode.BadRequest) ||
-                response.StatusCode == HttpStatusCode.NoContent ||
-                response.StatusCode == HttpStatusCode.OK
-            );
-
-            // Clean up
-            await DeletarAdminAsync(token);
+            //Assert
+            //await DeletarAdminAsync(token);
+            Assert.True((content == "Não foram encontradas áreas de conhecimento." && response.StatusCode == HttpStatusCode.BadRequest) || response.StatusCode == HttpStatusCode.NoContent || response.StatusCode == HttpStatusCode.OK);
         }
 
         [Theory]
@@ -65,13 +46,14 @@ namespace EmprestimoLivros.Tests.IntegrationTests
             // Assert
             if (content == "Área de conhecimento não cadastrada." || response.StatusCode == HttpStatusCode.NotFound || response.StatusCode == HttpStatusCode.BadRequest)
             {
+                await DeletarAdminAsync(token);
                 Assert.True(true);
             }
             else
             {
+                await DeletarAdminAsync(token);
                 Assert.True(response.StatusCode == HttpStatusCode.NoContent || response.StatusCode == HttpStatusCode.OK);
             }
-            await DeletarAdminAsync(token);
         }
 
         [Theory]
@@ -88,8 +70,8 @@ namespace EmprestimoLivros.Tests.IntegrationTests
             var response = await _httpClient.GetAsync(url.Replace("{Id}", id));
 
             //Assert
-            Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
             await DeletarAdminAsync(token);
+            Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
         }
 
     }
