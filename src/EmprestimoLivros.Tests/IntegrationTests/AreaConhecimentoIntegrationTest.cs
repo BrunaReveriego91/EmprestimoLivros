@@ -16,16 +16,35 @@ namespace EmprestimoLivros.Tests.IntegrationTests
         {
             // Arrange
             var token = await ObterTokenAutenticacaoAsync();
+            if (string.IsNullOrEmpty(token))
+            {
+                Assert.Fail("Failed to obtain authentication token.");
+            }
             DefinirAutenticacaoHeader(token);
 
-            //Arrange & Act                     
-            var response = await _httpClient.GetAsync(url);
+            // Act
+            HttpResponseMessage response = null;
+            try
+            {
+                response = await _httpClient.GetAsync(url);
+            }
+            catch (Exception ex)
+            {
+                Assert.Fail($"Request failed: {ex.Message}");
+            }
 
-            var content = await response.Content.ReadAsStringAsync(default);
+            // Assert
+            Assert.NotNull(response);
+            var content = await response.Content.ReadAsStringAsync();
 
-            //Assert
-            Assert.True((content == "Não foram encontradas áreas de conhecimento." && response.StatusCode == HttpStatusCode.BadRequest) || response.StatusCode == HttpStatusCode.NoContent || response.StatusCode == HttpStatusCode.OK);
+            // Check status code and content
+            Assert.True(
+                (content == "Não foram encontradas áreas de conhecimento." && response.StatusCode == HttpStatusCode.BadRequest) ||
+                response.StatusCode == HttpStatusCode.NoContent ||
+                response.StatusCode == HttpStatusCode.OK
+            );
 
+            // Clean up
             await DeletarAdminAsync(token);
         }
 
