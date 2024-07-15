@@ -29,7 +29,6 @@ O sistema de empréstimo de livros terá um API que será responsável pelas reg
         5. Cadastro de tipo de publicações
         6. Cadastro de publicações 
         7. Cadastro de empréstimos
-        8. Cadastro de reserva de livros
 
 ## Instalar MongoDB
 
