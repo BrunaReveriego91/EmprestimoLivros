@@ -40,6 +40,7 @@ namespace EmprestimoLivros.Tests.IntegrationTests
 
             // Assuming successful creation returns the publication ID:
             var responseString = await response.Content.ReadAsStringAsync();
+            await DeletarAdminAsync(token);
             return responseString;
         }
 
